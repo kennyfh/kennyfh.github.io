@@ -13,8 +13,8 @@ languageName = "English"
 
 # Author config
 [author]
-  name = "xxxx"
-  email = ""
+  name = "Kenny F"
+  email = "kennyjesus@protonmail.com"
   link = ""
 
 # Menu config
@@ -95,7 +95,7 @@ languageName = "English"
     # LoveIt NEW | 0.2.0 whether to show the author
     author = true
     # Site creation time
-    since = 2019
+    since = 2022
     # ICP info only in China (HTML format is supported)
     icp = ""
     # license info (HTML format is supported)
@@ -168,9 +168,9 @@ languageName = "English"
       # URL of avatar shown in home page
       avatarURL = "/images/avatar.jpg"
       # LoveIt CHANGED | 0.2.7 title shown in home page (HTML format is supported)
-      title = ""
+      title = "Kenny Flores"
       # subtitle shown in home page (HTML format is supported)
-      subtitle = "This is My New Hugo Site"
+      subtitle = "Computer Scientist"
       # whether to use typeit animation for subtitle
       typeit = true
       # whether to show social links
@@ -188,14 +188,14 @@ languageName = "English"
 
   # Social config about the author
   [params.social]
-    GitHub = "xxxx"
-    Linkedin = ""
-    Twitter = "xxxx"
-    Instagram = "xxxx"
-    Facebook = "xxxx"
-    Telegram = "xxxx"
+    GitHub = "kennyfh"
+    Linkedin = "kennyfh/"
+    Twitter = ""
+    Instagram = ""
+    Facebook = ""
+    Telegram = ""
     Medium = ""
-    Gitlab = ""
+    Gitlab = "MrKenny"
     Youtubelegacy = ""
     Youtubecustom = ""
     Youtubechannel = ""
@@ -261,8 +261,8 @@ languageName = "English"
     HackTheBox = ""
     RootMe= ""
     Phone = ""
-    Email = "xxxx@xxxx.com"
-    RSS = true # LoveIt NEW | 0.2.0
+    Email = "kennyjesus@protonmail.com"
+    RSS = false # LoveIt NEW | 0.2.0
 
   # LoveIt CHANGED | 0.2.0 Page global config
   [params.page]
