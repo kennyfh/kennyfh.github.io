@@ -10,7 +10,7 @@ theme = "LoveIt"
 title = "Kenny Flores's blog"
 
 # determines default content language ["en", "zh-cn", "fr", "pl", ...]
-defaultContentLanguage = "en"
+defaultContentLanguage = "es"
 # language code ["en", "zh-CN", "fr", "pl", ...]
 
 languageCode = "en"
