@@ -12,7 +12,7 @@ resources:
 - name: "featured-image"
   src: "featured-image.jpg"
 
-tags: ["installation", "configuration"]
+tags: ["Markov", "reinforce-learning","system-recomendation"]
 categories: ["documentation"]
 
 lightgallery: true
@@ -24,19 +24,27 @@ toc:
 Discover what the Hugo - **LoveIt** theme is all about and the core-concepts behind it.
 
 <!--more-->
+## 1. Introducción
 
-## 1 Requirements
+<!-- 1. Introducción: Explicar en términos generales de qué se trata el Reinforcement Learning y los sistemas de recomendación, y cómo estos temas están relacionados entre sí. -->
 
-Thanks to the simplicity of Hugo, [Hugo](https://gohugo.io/) is the only dependency of this theme.
+## 2. Aprendizaje profundo
+<!-- 
+2. Reinforcement Learning: Proporcionar una descripción detallada de qué es el Reinforcement Learning, cómo funciona y algunos ejemplos de su aplicación en la industria. -->
 
-Just install latest version of [:(far fa-file-archive fa-fw): Hugo (> 0.62.0)](https://gohugo.io/getting-started/installing/) for your OS (**Windows**, **Linux**, **macOS**).
+## 3. Sistemas de Recomendación
 
-{{< admonition note "Why not support earlier versions of Hugo?" >}}
-Since [Markdown Render Hooks](https://gohugo.io/getting-started/configuration-markup#markdown-render-hooks) was introduced in the [Hugo Christmas Edition](https://gohugo.io/news/0.62.0-relnotes/), this theme only supports Hugo versions above **0.62.0**.
-{{< /admonition >}}
+<!-- 3. Sistemas de recomendación: Explicar de qué se trata los sistemas de recomendación, cómo funcionan y dar algunos ejemplos de su uso en diferentes campos, como el comercio electrónico, la industria del entretenimiento, etc. -->
 
-{{< admonition tip "Hugo extended version is recommended" >}}
-Since some features of this theme need to processes :(fab fa-sass fa-fw): SCSS to :(fab fa-css3 fa-fw): CSS, it is recommended to use Hugo **extended** version for better experience.
-{{< /admonition >}}
 
-## 2 Installation
+## 4. Aplicaciones
+
+<!-- 4. Aplicaciones: Proporcionar ejemplos específicos de cómo el Reinforcement Learning y los sistemas de recomendación se utilizan juntos en aplicaciones prácticas. -->
+
+## 5. Conclusiones
+
+
+<!-- 5. Conclusión: Resumen de los puntos principales discutidos en la página y futuras perspectivas en el campo del Reinforcement Learning y los sistemas de recomendación. -->
+
+## 6. Referencias
+<!-- 6. Referencias: Proporcionar una lista de recursos y referencias para aquellos que deseen profundizar en el tema. -->
