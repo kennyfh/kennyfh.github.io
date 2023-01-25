@@ -19,32 +19,73 @@ lightgallery: true
 
 toc:
   auto: false
+
+math:
+  enable: true  
 ---
 
-Discover what the Hugo - **LoveIt** theme is all about and the core-concepts behind it.
+<!--
+Que es un sistema de recomendación
+Sistemas de recomendación tradicionales:
+    - CF
+    - based in content
 
-<!--more-->
-## 1. Introducción
+Sistemas de recomendación con RL:
+    - Que es el reinforce learning
+    - Aplicaciones de sistemas con RL
+    
+Caso práctico: RL para sistemas de recomendación de
+vídeos de youtube
 
-<!-- 1. Introducción: Explicar en términos generales de qué se trata el Reinforcement Learning y los sistemas de recomendación, y cómo estos temas están relacionados entre sí. -->
+Conclusiones
 
-## 2. Aprendizaje profundo
-<!-- 
-2. Reinforcement Learning: Proporcionar una descripción detallada de qué es el Reinforcement Learning, cómo funciona y algunos ejemplos de su aplicación en la industria. -->
+Referencias
+NO SE DONDE INCLUIR MOVIELENS
+-->
 
-## 3. Sistemas de Recomendación
+El aprendizaje por refuerzo ha tenido grandes avances en la robótica y en los videojuegos, pero con la creciente importancia de generar contenido personalizado al usuario en las plataformas en línea como Netflix o Spotify, el generar sistemas de recomendación basados en aprendizaje por refuerzo puede ofrecernos una serie de mejoras positivas a diferencia de los sistemas tradicionales basados en aprendizaje supervisado.
 
-<!-- 3. Sistemas de recomendación: Explicar de qué se trata los sistemas de recomendación, cómo funcionan y dar algunos ejemplos de su uso en diferentes campos, como el comercio electrónico, la industria del entretenimiento, etc. -->
+En este estudio se discutirá los diferentes tipos de sistemas de recomendación, los desafíos a los que tendremos que enfrentarnos del pasar de los sistemas tradicionales al uso de aprendizaje reforzado, un caso práctico donde se está usando en el mundo real, y una visión general de las tendencias y desarrollos actuales en el campo.
+
+## 1. Sistemas de recomendación
+
+Los sistemas de recomendación (o llamados en inglés "recommender systems") son algoritmos que buscan sugerir contenido o productos relevantes al usuario, en base a sus preferencias y otras informaciones relevantes.
+
+Estos sistemas son fundamentales en diferentes industrias (como el comercio electrónico o aplicaciones de entrenimiento multimedia) para descubrir el contenido que les interesaría al usuario, haciendo que aumente la probabilidad de que se retengan en la plataforma y generen ingresos para la empresa.
 
 
-## 4. Aplicaciones
+### Sistemas de recomendación tradicionales
 
-<!-- 4. Aplicaciones: Proporcionar ejemplos específicos de cómo el Reinforcement Learning y los sistemas de recomendación se utilizan juntos en aplicaciones prácticas. -->
+<!--
+TODO: si añadimos los de segunda generación, deberemos
+cambiar algunas cosas de aquí
 
-## 5. Conclusiones
+si no, no pasa nada
+
+-->
+
+Existen dos paradigmas importantes dentro de los sistemas de recomendación antiguos: el filtro colaborativo y los sistemas basados en contenido. 
 
 
-<!-- 5. Conclusión: Resumen de los puntos principales discutidos en la página y futuras perspectivas en el campo del Reinforcement Learning y los sistemas de recomendación. -->
+#### Sistemas de recomendación basados en filtro colaborativo
 
-## 6. Referencias
-<!-- 6. Referencias: Proporcionar una lista de recursos y referencias para aquellos que deseen profundizar en el tema. -->
+Este método construye una matriz de interacción usuario-elemento, que recoge las interacciones previas de los usuarios con los elementos.
+
+Los elementos o items son los productos que se quieren recomendar al usuario (canciones, películas, libros, entre otros).
+
+Se hace uso de esta matriz para idenfiticar los perfiles similares en función de su proximidad y aprender de sus intereses para recomendar a los usuarios. 
+
+Ejemplo de matriz de interacción usuario-elemento:
+
+
+
+En la figura anterior, se puede observar que tenemos una matriz donde las columnas son los productos que queremos valorar, y las filas son los usuarios que le dan una valoración a esos productos.
+
+Las casillas que no están con ninguna valoración significan que el usuario aún no ha probado ese producto (en este caso una fruta). Por lo cual esas casillas que están vacías se deberán rellenar para recomendar items al usuario, y se realizará haciendo uso de aprendizaje automático.
+
+<!--
+TODO: repasar esto
+-->
+
+
+#### Sistemas de recomendación basados en contenido
