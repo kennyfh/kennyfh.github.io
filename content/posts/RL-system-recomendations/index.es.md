@@ -77,15 +77,57 @@ Se hace uso de esta matriz para idenfiticar los perfiles similares en función d
 
 Ejemplo de matriz de interacción usuario-elemento:
 
+<!--
 
+TODO: INSERTAR IMAGEN DE MATRIZ DE INTERACCIÓN USUARIO-ELEMENTO
+
+-->
 
 En la figura anterior, se puede observar que tenemos una matriz donde las columnas son los productos que queremos valorar, y las filas son los usuarios que le dan una valoración a esos productos.
 
-Las casillas que no están con ninguna valoración significan que el usuario aún no ha probado ese producto (en este caso una fruta). Por lo cual esas casillas que están vacías se deberán rellenar para recomendar items al usuario, y se realizará haciendo uso de aprendizaje automático.
+Las casillas que no están con ninguna valoración significan que el usuario aún no ha probado ese producto. Por lo cual nuestro objetivo es encontrar un modelo que prediga las interacciones que faltan en la matriz.
+
+Dentro de este paradigma existen dos tipos de filro colaborativo:
 
 <!--
-TODO: repasar esto
+(https://impulsatek.com/11-sistemas-de-recomendacion-y-modelos-de-aprendizaje-basados-en-grafos/#Sistemas_basados_en_filtrado_colaborativo)
 -->
+
+##### Basados en memoria
+
+Aquí cuando tengamos un nuevo usuario calculamos la valoración de un producto por similitud entre usuarios o por parecido entre los productos.
+
+<!--
+La similitud o distancia entre usuarios o contanidos se puede calcular usando distancia euclidea, manhattan, jaccard, correlaciones, etc.
+-->
+
+##### Basados en modelos
+
+Mientras tanto, en estos métodos se desarrollan modelos haciendo uso de algoritmos de aprendizaje automático sobre la matriz usuario-elemento para predecir las valoraciones de los usuarios de los elementos no valorados.
 
 
 #### Sistemas de recomendación basados en contenido
+
+En lugar de basarse en el historial de acciones de los usuarios, estos métodos usan la información sobre el contenido de los productos para enconrar similitudes y recomendar productos similares a los que el usuario ha mostrado interés.
+
+Estos métodos también usan técnicas de aprendizaje automático para generar estas recomendaciones.
+
+
+### Limitaciones del aprendizaje supervisado
+
+Estos métodos tradicionales de recomendación están muy influenciados por técnicas de aprendizaje automático, y estos presentan algunas limitaciones que discutiremos a continuación:
+
+#### System bias
+
+
+#### Recomendación miope
+
+
+Los sistemas de recomendación tradicionales tienen el problema de dar recomendaciones que probablemente te lleven a una respuesta inmediata, además de llevarte a resultados que tienden a recomendar un contenido que un usuario ha consumido previamente (recomendación miope). 
+
+EL que ocurra esto puede llevar a que un usuario acabe encerrado en una "burbuja de recomendación", en la cual un usuario se ve expuesto a un conjunto cada vez más estrecho de contenido.Y  en el peor de los casos, podría dañar la confianza de los usuarios a largo plazo.
+
+## Sistemas de recomendación con RL
+
+
+
