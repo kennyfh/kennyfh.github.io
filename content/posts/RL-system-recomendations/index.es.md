@@ -117,17 +117,69 @@ Estos métodos también usan técnicas de aprendizaje automático para generar e
 
 Estos métodos tradicionales de recomendación están muy influenciados por técnicas de aprendizaje automático, y estos presentan algunas limitaciones que discutiremos a continuación:
 
-#### System bias
-
-
 #### Recomendación miope
 
 
 Los sistemas de recomendación tradicionales tienen el problema de dar recomendaciones que probablemente te lleven a una respuesta inmediata, además de llevarte a resultados que tienden a recomendar un contenido que un usuario ha consumido previamente (recomendación miope). 
 
-EL que ocurra esto puede llevar a que un usuario acabe encerrado en una "burbuja de recomendación", en la cual un usuario se ve expuesto a un conjunto cada vez más estrecho de contenido.Y  en el peor de los casos, podría dañar la confianza de los usuarios a largo plazo.
+El que ocurra esto puede llevar a que un usuario acabe encerrado en una "burbuja de recomendación", en la cual un usuario se ve expuesto a un conjunto cada vez más estrecho de contenido.Y  en el peor de los casos, podría dañar la confianza de los usuarios a largo plazo.
+
+#### Sesgo del sistema
+<!-- System bias -->
+
+Otro problema que nos podemos encontrar en estos sistemas es que no tienen en cuenta factores adicionales como las preferencias del usuario o el sesgo del sistema, lo que puede resultar en recomendaciones poco precisas o irrelevantes.
 
 ## Sistemas de recomendación con RL
 
+<!-- Sistemas de recomendación con RL:
+    - Que es el reinforce learning
+    - Aplicaciones de sistemas con RL -->
+
+Viendo las limitaciones que tiene el usar los sistemas de recomendación tradicionales, podemos hacer uso de aprendizaje por refuerzo para darle un nuevo enfoque al recomendar contenido a los usuarios.
+
+<!-- Podríamos decir  "dinámicas del usuario para opimizarsu utilidad a largo plazo -->
+El objetivo sería asegurar y descubrir las preferencias dinámicas del usuario para maximizar su satisfacción dentro de la plataforma, esto es posible con el paradigma del aprendizaje por refuerzo, debido a que es capaz de aprender contínuamente y equilibrar el mostrarle tanto contenido relevante para el usuario como presentarle contenido novedoso que le genere nuevos intereses.
+
+Aunque obviamente aplicar este paradigma no es tan sencillo, ya que nos encontraremos una serie de desafíos que vamos a tener que resolver.
+
+### ¿Qué es el aprendizaje por refuerzo?
+
+El aprendizaje por refuerzo (Reinforce Learning en inglés) es la técnica más cercana al aprendizaje humano que se pueden conseguir en los sistemas actuales. Este paradigma consiste en que un agente (como podría ser un robot o una máquina) aprende a tomar acciones en un entorno mediante la retroalimentación en forma de recompensas o castigos. 
+
+Al agente se le coloca en un entorno desconocido, donde debe tomar decisiones para alcanzar un objetivo específico, que mediante prueba y error, el agente aprende cuales acciones llevan a un resultado positivo, por lo cual las irá repitiendo, mientras que las acciones que lo lleven por un resultado negativo las va a ir evitando. 
+
+Como hemos hablado, este paradigma tiene una gran variedad de aplicaciones como en el procesamiento del lenguaje natural, marketing o robots automatizados. Pero veremos que puede tener un uso muy interesante en los sistemas de recomendaciones.
+
+### Retos al aplicar aprendizaje por refuerzo en sistemas de recomendación
+
+Hemos visto que con este paradigma se pueden resolver los problemas que tenían los sistemas tradicionales, pero, ahora vamos a hablar de los diferentes retos que nos podríamos encontrar a la hora de poner en práctica este método.
+
+1. **Gran espacio de acción:** 
+
+<!-- El Gran espacio de acción se refiere a la cantidad de posibles acciones que un sistema de recomendación con aprendizaje por refuerzo puede tomar en un momento dado. En un sistema de recomendación, las acciones pueden ser las recomendaciones que se presentan al usuario. Cuanto mayor sea el espacio de acción, más difícil será para el sistema aprender las preferencias del usuario debido a la complejidad del problema y el tamaño de los datos. Por lo tanto, el Gran espacio de acción puede ser un desafío para el desarrollo de sistemas de recomendación eficaces.
+
+Para abordar este desafío, se utilizan diversas técnicas, como el aprendizaje basado en la política, el aprendizaje basado en valor y el aprendizaje basado en el modelo. Estas técnicas buscan aprender una política óptima que maximice la recompensa del usuario a través de la selección de recomendaciones adecuadas en un gran espacio de acción.
+
+En nuestro caso, tenemos que clasificar millones o miles de millones de vídeos para hacer recomendaciones.
+Por lo tanto, el espacio de acción es de millones o miles de millones, y si queremos hacer este tipo de recomendaciones, el espacio de acción es aún mayor. -->
 
 
+2. **Exploración costosa:**
+
+
+3. **Aprendizaje fuera de la política:**
+
+
+4. **Observabilidad parcial:**
+
+5. **Recompensa ruidosa:** esto se refiere a que tenemos señales de recompensa muy ruidosas y dispersas prodecentes de los usuarios. Esto puede ocurrir por una gran variedad de motivos, como podría ser la falta de información del contexto, que el usuario se sienta incómodo proporcionando recomendación o simplemente el usuario no sepa lo que quiere. <!-- TODO: BUSCAR MEJOR FRASE Debido a esto, habrá que buscar alguna forma de minimizar ese ruido. -->
+
+
+
+<!-- ## Aplicaciones -->
+
+## Caso práctico: RL para sistemas de recomendación de vídeos de youtube
+
+## Conclusiones
+
+## Referencias
