@@ -154,31 +154,62 @@ Como hemos hablado, este paradigma tiene una gran variedad de aplicaciones como 
 
 Hemos visto que con este paradigma se pueden resolver los problemas que tenían los sistemas tradicionales, pero, ahora vamos a hablar de los diferentes retos que nos podríamos encontrar a la hora de poner en práctica este método.
 
-1. **Gran espacio de acción:** 
+1. **Gran espacio de acción:** se refiere a la cantidad de posibles acciones que un sistema de recomendación basado por refuerzo debe tomar en momento determinado.
 
-<!-- El Gran espacio de acción se refiere a la cantidad de posibles acciones que un sistema de recomendación con aprendizaje por refuerzo puede tomar en un momento dado. En un sistema de recomendación, las acciones pueden ser las recomendaciones que se presentan al usuario. Cuanto mayor sea el espacio de acción, más difícil será para el sistema aprender las preferencias del usuario debido a la complejidad del problema y el tamaño de los datos. Por lo tanto, el Gran espacio de acción puede ser un desafío para el desarrollo de sistemas de recomendación eficaces.
+    Por ejemplo, si quisieramos desarrollar un sistema de recomendación que recomiende vídeos de Youtube a un usuario, el espacio de estados serían la gigantesca cantidad de vídeos disponibles en el sitio.
 
-Para abordar este desafío, se utilizan diversas técnicas, como el aprendizaje basado en la política, el aprendizaje basado en valor y el aprendizaje basado en el modelo. Estas técnicas buscan aprender una política óptima que maximice la recompensa del usuario a través de la selección de recomendaciones adecuadas en un gran espacio de acción.
+    El gran espacio de estados representa un enorme desafío para el desarrollo del sistema, debido a que cuanto mayor sea el espacio de estados, más compleja será la tarea de aprender las preferencias del problema y seleccionar los productos (por ejemplo, los vídeos de Youtube) más adecuados para recomendar.
 
-En nuestro caso, tenemos que clasificar millones o miles de millones de vídeos para hacer recomendaciones.
-Por lo tanto, el espacio de acción es de millones o miles de millones, y si queremos hacer este tipo de recomendaciones, el espacio de acción es aún mayor. -->
+2. **Exploración costosa:** la exploración puede ser costosa en estos sistemas debido a la necesidad de probar diferentes acciones y adaptarse a los cambios en los gustos y preferencias del usuario.
 
-
-2. **Exploración costosa:**
+    Aún así es importante hacer una buena exploración, debido a que si el recomendador solo te muestra contenido aleatorio, podría generar una mala experiencia al usuario.
 
 
-3. **Aprendizaje fuera de la política:**
+<!-- 3. **Aprendizaje fuera de la política:** el aprendizaje fuera de la política o también conocido como off-policy es una técnica usada en aprendizaje por refuerzo que permite al sistema aprender de experiencias pasadas diferentes a la política actual, mejorando así su habilidad para poder adaptarse a situaciones no previstas anteriormente.
+
+      El detalle es que implementar esta técnica puede ser muy desafiante debido a la complejidad en la selección y procesamiento de los datos de entrenamiento, como complicado de ajstar  -->
 
 
-4. **Observabilidad parcial:**
-
-5. **Recompensa ruidosa:** esto se refiere a que tenemos señales de recompensa muy ruidosas y dispersas prodecentes de los usuarios. Esto puede ocurrir por una gran variedad de motivos, como podría ser la falta de información del contexto, que el usuario se sienta incómodo proporcionando recomendación o simplemente el usuario no sepa lo que quiere. <!-- TODO: BUSCAR MEJOR FRASE Debido a esto, habrá que buscar alguna forma de minimizar ese ruido. -->
+3. **Observabilidad parcial:** cuando estamos construyendo el sistema de recomendación, el usuario no nos informa explícitamente lo que le interesa y debemos inferir ese interés del usuario a partir de las actividades que realiza en la plataforma.
 
 
+4. **Recompensa ruidosa:** esto se refiere a que tenemos señales de recompensa muy ruidosas y dispersas prodecentes de los usuarios. Esto puede ocurrir por una gran variedad de motivos, como podría ser la falta de información del contexto, que el usuario se sienta incómodo proporcionando recomendación o simplemente el usuario no sepa lo que quiere. <!-- TODO: BUSCAR MEJOR FRASE Debido a esto, habrá que buscar alguna forma de minimizar ese ruido. -->
 
 <!-- ## Aplicaciones -->
 
 ## Caso práctico: RL para sistemas de recomendación de vídeos de youtube
+
+En esta sección vamos a realizar un análisis de un caso real de implementación de un sistema de recomendación basado en aprendizaje por refuerzo. En este caso será el de recomendación de videos de youtube, desarrollado por la empresa Google.
+
+
+### Introducción
+
+El acceso a contenido en línea se ha convertido en una necesidad entre las plataformas más populares se encuentra Youtube, donde millones de personas consumen vídeos cada día. No obstante, el hacer uso de los sistemas tradicionales nos podía producir que los usuarios acaben encerrados en una "burbuja"  o dar recomendaciones irrelevantes que hagan que se pierda la confianza en el usuario, por lo cual el objetivo es adaptar y descubrir las preferencias dinámicas del usuario para poder optimizar su utilidad a largo plazo, y esto podremos conseguirlo haciendo uso del aprendizaje por refuerzo.
+
+### Generación de candidatos
+
+El sistema que produce las recomendaciones de los vídeos de Youtube es un recomendador de varias etapas, que selecciona docenas de videos para los usuarios a partir de un corpus formado por miles de millones de vídeos.
+
+<!--
+TODO: AÑADIR IMAGEN DE CANDIDATE GENERATOR DEL MINUTO
+11:55 SIN LA PARTE DE LA DERECHA 
+
+-->
+
+En este estudio solamente se han centrado en la etapa de **generación de candidatos**, donde entra el corpus de los vídeos y  se reduce a unos cientos de vídeos más relevantes para pasar a la siguiente etapa.
+
+Habrá algunos desafíos que se han encontrado para construir esta estructura, ya que el sistema de recomendación debe enfrentarse a los miles de millones de usuarios con preferencias que van cambiando a lo largo del tiempo, a miles de millones de vídeos que no tienen una gran cantidad de visitas, pero son relevantes para un pequeño grupo de usuarios (distribución de lanzamiento), o también comentarios de usuario ruidosos y dispersos. 
+
+### Aprendizaje por refuerzo en sistemas de recomendación
+
+Una vez hayamos entendido el significado de la generación de candidatos, vamos a basarlo en aprendizaje por refuerzo.
+
+El objetivo es construir agentes que realicen acciones en un entorno para maximizar una noción de recompensa acumulativa, por lo que vamos a considerar nuestro **agente** al candidato generador, los **estados** serán el interés de los usuarios, así como los contactos de recomendación, la **recompensa** será la satisfacción del usuario y finalmente las **acciones** que pueden tomar el agente es elegir y proponer videos para ser incluidos en un catálogo con millones de videos.
+
+#### Fuente de los datos
+
+
+
 
 ## Conclusiones
 
