@@ -59,9 +59,7 @@ Estos sistemas son fundamentales en diferentes industrias (como el comercio elec
 <!--
 TODO: si añadimos los de segunda generación, deberemos
 cambiar algunas cosas de aquí
-
 si no, no pasa nada
-
 -->
 
 Existen dos paradigmas importantes dentro de los sistemas de recomendación antiguos: el filtro colaborativo y los sistemas basados en contenido. 
@@ -82,7 +80,11 @@ Ejemplo de matriz de interacción usuario-elemento:
 TODO: INSERTAR IMAGEN DE MATRIZ DE INTERACCIÓN USUARIO-ELEMENTO
 
 -->
-
+![Matrix](matrix-user-element.png "Matriz de interacción usuario-elemento")
+<!-- https://developers.google.com/machine-learning/recommendation/collaborative/basics?hl=es-419 -->
+<!-- <div style="text-align: center;">
+<img src="matrix-user-element.png" alt="texto alternativo" style="width: 500px; height: 500px;">
+</div> -->
 En la figura anterior, se puede observar que tenemos una matriz donde las columnas son los productos que queremos valorar, y las filas son los usuarios que le dan una valoración a esos productos.
 
 Las casillas que no están con ninguna valoración significan que el usuario aún no ha probado ese producto. Por lo cual nuestro objetivo es encontrar un modelo que prediga las interacciones que faltan en la matriz.
@@ -190,11 +192,8 @@ El acceso a contenido en línea se ha convertido en una necesidad entre las plat
 
 El sistema que produce las recomendaciones de los vídeos de Youtube es un recomendador de varias etapas, que selecciona docenas de videos para los usuarios a partir de un corpus formado por miles de millones de vídeos.
 
-<!--
-TODO: AÑADIR IMAGEN DE CANDIDATE GENERATOR DEL MINUTO
-11:55 SIN LA PARTE DE LA DERECHA 
+![Matrix](candidate_generator.png "Candidate generator")
 
--->
 
 En este estudio solamente se han centrado en la etapa de **generación de candidatos**, donde entra el corpus de los vídeos y  se reduce a unos cientos de vídeos más relevantes para pasar a la siguiente etapa.
 
@@ -214,8 +213,9 @@ En esta sección vamos a ver como los trabajadores de Youtube han ido construyen
 
 La fuente de datos que se ha utilizado para construir el agente es la trayectoria del usuario, es decir, una secuencia de actividades que el usuario ha realizado en la plataforma ( como los videos que ha visto, las búsquedas realizadad, etc.).
 
+![Matrix](agent_reward.png "Eventos de usuario")
 
-<!-- INSERTAR IMAGEN DE USER EVENTS DONDE SE VE EL USER STATE Y RECOMPENSA -->
+
 
 Esta información se divide en la **trayectoria secuencial del pasado**,compuesta por las actividades anteriores a las recomendaciones del agente, y la **trayectoria secuencial del futuro**, con la información sobre las actividades que el usuario ha realizado después de recibir las recomendaciones del agente.
 
@@ -223,7 +223,8 @@ La autora de la presentación menciona que hacen uso de la trayectoria secuencia
 
 #### Estados
 
-<!-- Poner img User state representation through RNNs -->
+![Matrix](states.png "Representación del estado del usuario mediante RNN")
+
 
 Uno de los grandes desafíos a la hora de construir la representación del estado es la observabilidad parcial debido a que los usuarios no nos proporcionan información sobre sus intereses o como están satisfechos con las recomendaciones que les damos. Por lo que, para abordar este desafío se usan redes neuronales recurrentes (RNN) para analizar la actividad previa del usuario y obtener una representación del estado.
 
@@ -233,9 +234,7 @@ En este caso haremos uso de un enfoque basado en políticas debido a que queremo
 
 Estamos tratando de aprender una política estocástica (Pi theta) que va a emitir una distribución sobre el espacio de estado de acciones, con el objetivo de maximizar la recompensa acumulada a largo plazo.
 
-<!-- Añadir imagen de Policy-based RL
-
- -->
+![Matrix](policyRL.png "RL basado en políticas")
 
 La trayectoria $\tau$ es generada siguiendo esta política y la recompensa acumulada es la suma total de recompensas para toda la trayectoria. Además, se pueden optimizar los parámetros de la política mediante el ascenso del gradiente. 
 
