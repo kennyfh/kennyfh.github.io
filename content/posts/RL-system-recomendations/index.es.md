@@ -206,10 +206,57 @@ Una vez hayamos entendido el significado de la generación de candidatos, vamos 
 
 El objetivo es construir agentes que realicen acciones en un entorno para maximizar una noción de recompensa acumulativa, por lo que vamos a considerar nuestro **agente** al candidato generador, los **estados** serán el interés de los usuarios, así como los contactos de recomendación, la **recompensa** será la satisfacción del usuario y finalmente las **acciones** que pueden tomar el agente es elegir y proponer videos para ser incluidos en un catálogo con millones de videos.
 
-#### Fuente de los datos
+### Construcción del modelo
+
+En esta sección vamos a ver como los trabajadores de Youtube han ido construyendo el agente de recomendación de vídeos hacienddo uso de aprendizaje por refuerzo.
+
+#### Agente y Recompensa
+
+La fuente de datos que se ha utilizado para construir el agente es la trayectoria del usuario, es decir, una secuencia de actividades que el usuario ha realizado en la plataforma ( como los videos que ha visto, las búsquedas realizadad, etc.).
 
 
+<!-- INSERTAR IMAGEN DE USER EVENTS DONDE SE VE EL USER STATE Y RECOMPENSA -->
 
+Esta información se divide en la **trayectoria secuencial del pasado**,compuesta por las actividades anteriores a las recomendaciones del agente, y la **trayectoria secuencial del futuro**, con la información sobre las actividades que el usuario ha realizado después de recibir las recomendaciones del agente.
+
+La autora de la presentación menciona que hacen uso de la trayectoria secuencial del pasado para llegar a la "creencia del estado del usuario" y hacen uso de la **trayectoria futura** para llegar a la recompensa.
+
+#### Estados
+
+<!-- Poner img User state representation through RNNs -->
+
+Uno de los grandes desafíos a la hora de construir la representación del estado es la observabilidad parcial debido a que los usuarios no nos proporcionan información sobre sus intereses o como están satisfechos con las recomendaciones que les damos. Por lo que, para abordar este desafío se usan redes neuronales recurrentes (RNN) para analizar la actividad previa del usuario y obtener una representación del estado.
+
+#### Acciones
+
+En este caso haremos uso de un enfoque basado en políticas debido a que queremos maximizar directamente la recompensa a largo plazo y es más estable que un enfoque basado en valores.
+
+Estamos tratando de aprender una política estocástica (Pi theta) que va a emitir una distribución sobre el espacio de estado de acciones, con el objetivo de maximizar la recompensa acumulada a largo plazo.
+
+<!-- Añadir imagen de Policy-based RL
+
+ -->
+
+La trayectoria $\tau$ es generada siguiendo esta política y la recompensa acumulada es la suma total de recompensas para toda la trayectoria. Además, se pueden optimizar los parámetros de la política mediante el ascenso del gradiente. 
+
+A causa de esto, se podría decir que el aprnedizaje por refuerzo está muy conectado al aprendizaje  supervisado, debido a que se optimiza para la verosimilitud logarítmica de observar la próxima acción, pero el paradigma del aprendizaje reforzado ofrece una manera de pensar en la exploración, planificación y cambio en el estado del usuario subyacente.
+
+Usa una técnica de muestreo para abordar el espacio de acciones muy grande y ejecuta una búsqueda rápida en vecindarios para reducir el tiempo de procesamiento.
+
+### Resolución de las limitaciones del aprendizaje automático
+
+En esta parte vamos a ver como han podido solucionar las dos limitaciones que tienen los sistemas de recomendación tradicionales
+
+#### Recomendación miope
+
+Para abordar el problema que teníamos con la recomendación miope es incorporar recompensas futuras en lugar de solo considerar recompensas inmediatas. 
+
+Cuando se hicieron experimentos, la incorporación de estas recompensas futuras hicieron que haya un aumento del 0.3% de ganancia en la matriz en línea.
+
+
+#### Sesgo del sistema 
+
+Este sistema solo tiene acceso a los datos de registro que son generados por un agente que se va actualizando cada 5 horas, lo que significa que la política de los agentes podría ser muy diferente de la política objetivo que se está tratando de aprender, por lo tanto, el equipo sigue estudiando como hacer frente al sesgo del sistema causado por solo tener acceso a estos datos de registro.
 
 ## Conclusiones
 
