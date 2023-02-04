@@ -24,25 +24,6 @@ math:
   enable: true  
 ---
 
-<!--
-Que es un sistema de recomendación
-Sistemas de recomendación tradicionales:
-    - CF
-    - based in content
-
-Sistemas de recomendación con RL:
-    - Que es el reinforce learning
-    - Aplicaciones de sistemas con RL
-    
-Caso práctico: RL para sistemas de recomendación de
-vídeos de youtube
-
-Conclusiones
-
-Referencias
-NO SE DONDE INCLUIR MOVIELENS
--->
-
 El aprendizaje por refuerzo ha tenido grandes avances en la robótica y en los videojuegos, pero con la creciente importancia de generar contenido personalizado al usuario en las plataformas en línea como Netflix o Spotify, el generar sistemas de recomendación basados en aprendizaje por refuerzo puede ofrecernos una serie de mejoras positivas a diferencia de los sistemas tradicionales basados en aprendizaje supervisado.
 
 En este estudio se discutirá los diferentes tipos de sistemas de recomendación, los desafíos a los que tendremos que enfrentarnos del pasar de los sistemas tradicionales al uso de aprendizaje reforzado, un caso práctico donde se está usando en el mundo real, y una visión general de las tendencias y desarrollos actuales en el campo.
@@ -54,18 +35,16 @@ Los sistemas de recomendación (o llamados en inglés "recommender systems") son
 Estos sistemas son fundamentales en diferentes industrias (como el comercio electrónico o aplicaciones de entrenimiento multimedia) para descubrir el contenido que les interesaría al usuario, haciendo que aumente la probabilidad de que se retengan en la plataforma y generen ingresos para la empresa.
 
 
-### Sistemas de recomendación tradicionales
+### 1.1 Sistemas de recomendación tradicionales
 
-<!--
-TODO: si añadimos los de segunda generación, deberemos
-cambiar algunas cosas de aquí
-si no, no pasa nada
--->
+Dentro de los sistemas de recomendación existen diversas técnicas que nos brinden recomendaciones valiosas y personalizadas a cada usuario. Por lo que la siguiente figura muestra la estructura de las diferentes técnicas que existen de forma tradicional.
 
-Existen dos paradigmas importantes dentro de los sistemas de recomendación antiguos: el filtro colaborativo y los sistemas basados en contenido. 
+![Matrix](recommender_systems.png "Técnicas de recomendación")
+
+Por tradición, estos sistemas se han agrupado en dos paradigmas muy importantes: **basados en filtro colaborativo** y otros **basados en contenido**.
 
 
-#### Sistemas de recomendación basados en filtro colaborativo
+#### 1.1.1 Sistemas de recomendación basados en filtro colaborativo
 
 Este método construye una matriz de interacción usuario-elemento, que recoge las interacciones previas de los usuarios con los elementos.
 
@@ -73,18 +52,8 @@ Los elementos o items son los productos que se quieren recomendar al usuario (ca
 
 Se hace uso de esta matriz para idenfiticar los perfiles similares en función de su proximidad y aprender de sus intereses para recomendar a los usuarios. 
 
-Ejemplo de matriz de interacción usuario-elemento:
+![Matrix](matrix-user-element.png "Matriz de utilidad (o de puntuaciones)")
 
-<!--
-
-TODO: INSERTAR IMAGEN DE MATRIZ DE INTERACCIÓN USUARIO-ELEMENTO
-
--->
-![Matrix](matrix-user-element.png "Matriz de interacción usuario-elemento")
-<!-- https://developers.google.com/machine-learning/recommendation/collaborative/basics?hl=es-419 -->
-<!-- <div style="text-align: center;">
-<img src="matrix-user-element.png" alt="texto alternativo" style="width: 500px; height: 500px;">
-</div> -->
 En la figura anterior, se puede observar que tenemos una matriz donde las columnas son los productos que queremos valorar, y las filas son los usuarios que le dan una valoración a esos productos.
 
 Las casillas que no están con ninguna valoración significan que el usuario aún no ha probado ese producto. Por lo cual nuestro objetivo es encontrar un modelo que prediga las interacciones que faltan en la matriz.
@@ -97,27 +66,61 @@ Dentro de este paradigma existen dos tipos de filro colaborativo:
 
 ##### Basados en memoria
 
-Aquí cuando tengamos un nuevo usuario calculamos la valoración de un producto por similitud entre usuarios o por parecido entre los productos.
+<!-- Buscar paper: Recommendation systems: Principles, methods and
+evaluation -->
 
-<!--
-La similitud o distancia entre usuarios o contanidos se puede calcular usando distancia euclidea, manhattan, jaccard, correlaciones, etc.
--->
+En estos tipos de sistemas, hacen uso de las calificaciones previas de un usuario para encontrar a un vecino con preferencias similares para posteriormente combinar esas preferencias de los vecinos para generar recomendaciones.
+
+Existen dos técnicas: las **basadas en usuario** que calculan la similitud entre usuarios comparando las valoraciones sobre un mismo elemento, mientras que las **basadas en elemento** hacen predicciones haciendo uso del parecido entre los productos.
+
+La similitud (o distancia) entre usuarios o contenido puede ser calculado empleando distancias como la euclídea, Manhattan, Jaccard, entre otras muchas. Las más populares son la correlación y la similitud coseno. <!-- Referenciar el paper de recommendation systems, principles, methods and evaluation.-->
 
 ##### Basados en modelos
 
-Mientras tanto, en estos métodos se desarrollan modelos haciendo uso de algoritmos de aprendizaje automático sobre la matriz usuario-elemento para predecir las valoraciones de los usuarios de los elementos no valorados.
+En cambio, estas técnicas desarrollan modelos haciendo uso de algoritmos de aprendizaje automático sobre la matriz de utilidad para realizar una predicción de las valoraciones de los usuarios en los elementos no valorados.
 
 
-#### Sistemas de recomendación basados en contenido
+##### Ventajas y desventajas de los sistemas basados en filtro colaborativo
 
-En lugar de basarse en el historial de acciones de los usuarios, estos métodos usan la información sobre el contenido de los productos para enconrar similitudes y recomendar productos similares a los que el usuario ha mostrado interés.
+Estos sistemas tienen la capacidad para recomendar productos incluso si no hay valoraciones de los usuarios, además de adaptarse a los cambios en las preferencias de los usuarios y proporcionar recomendaciones relevantes sin compartir información del perfil del usuario.
 
-Estos métodos también usan técnicas de aprendizaje automático para generar estas recomendaciones.
+Entre las desventajas, podemos encontrarnos el problema del **comienzo en frío**, cuando un sistema de recomendación no tiene suficiente información sobre un usuario o un producto para hacer predicciones relevantes, el problema de **dispersión de los datos**, consecuencia de la falta de elementos valorados en nuestra base de datos, el problema de la **escalabilidad** asociado a que los cálculos crecen linealmente con el número de usuarios y elementos, y el problema de la **sinonimia**, cuando los sistemas tiene dificultades para distinguir entre productos muy similares.
+
+#### 1.1.2 Sistemas de recomendación basados en contenido
+
+Esta técnica en lugar de basarse en el historial de acciones del usuario, estos métodos hacen uso de la información sobre el contenido de los productos para encontrar similitudes y poder recomendar productos similares a los que el usuario ya ha mostrado interés.
+
+Estos modelos pueden ser basados en el **modelo de espacio de espacio vectorial**, como podría ser la frecuencia de término - frecuencia inversa de documento (TF/idf), o **modelos probabilísticos**, como Naive Bayes, árboles de decisión o redes neuronales.
+
+Las ventajas que podemos decir de esta técnica es que no dependemos de la información de perfil de otros usuarios, debido a que uno influyen en las recomendaciones. Además, se tiene la capacidad de poder ajustar sus recomendaciones en un corto periodo de tiempo si el perfil de un usuario cambia como la de también proporcionar explicaciones sobre cómo se generaron las recomendaciones.
+
+La mayor desventaja de poder usar este paradigma es que tenemos que tener un amplio conocimiento y una descripción detallada de las características de los elementos en el perfil.
+
+### 1.2 Métricas de evaluación para algoritmos de recomendación
+
+La calidad de un algoritmo de recomendación puede evaluarse haciendo uso de distintos tipos de medidas, como lo pueden ser la precisión o la cobertura.
+
+Dentro de las métricas para medir la precisión de estos sistemas se dividen en métricas de precisión estadística y apoyo a la precisión de la decisión.
+
+Las métricas de **precisión estadística** comparan directamente las valoraciones predicas con las valoraciones reales. Una de las métricas más importantes para evaluar este tipo de sistemas sería el Error Medio Absoluto (o *Mean Absolute Error* (MAE) en inglés). Constaría de la siguiente definición:
 
 
-### Limitaciones del aprendizaje supervisado
+$$MAE = \frac{1}{N} \sum_{u,i}^{N} |p_{u,i} - r_{u,i}|$$
 
-Estos métodos tradicionales de recomendación están muy influenciados por técnicas de aprendizaje automático, y estos presentan algunas limitaciones que discutiremos a continuación:
+donde $P_{u,i}$ es la valoración prevista para el usuario $u$ en el item $i$ ,$r_{u,i}$ es la valoración real y N es el número total de valoraciones.
+
+Las métricas **de apoyo a la precisión de la decisión** ayudan a los usuarios a seleccionar los elementos de alta calidad entre el conjunto disponible, entre las más populares nos encontramos la Precisión y el Recall. Se suele hacer uso de la notación **P@K**, para indicar la Precisión de una recomendación de **K** objetos, o **R@K**, de forma análoga para el Recall:
+
+$$ P@K = \frac{|\text{Objetos relevantes en top K} |}{K}$$
+
+$$ R@K = \frac{|\text{Objetos relevantes en top K} |}{\text{Objetos relevantes}}$$
+
+Además de las métricas, podemos evaluar el sistema por su cobertura, que se refiere al porcentaje de items y usuarios para los cuales un sistema de recomendación puede proporcionar predicciones. La predicción puede ser prácticamente imposible si ningún usuario o pocos usuarios valoran un elemento. La cobertura puede reducirse definiendo vecindarios pequeños para los usuarios o productos.
+
+
+### 1.3 Limitaciones del aprendizaje supervisado
+
+Estos métodos tradicionales de recomendación están muy influenciados por técnicas de aprendizaje automático, y estos presentan algunas limitaciones que discutiremos a continuación: 
 
 #### Recomendación miope
 
@@ -131,7 +134,7 @@ El que ocurra esto puede llevar a que un usuario acabe encerrado en una "burbuja
 
 Otro problema que nos podemos encontrar en estos sistemas es que no tienen en cuenta factores adicionales como las preferencias del usuario o el sesgo del sistema, lo que puede resultar en recomendaciones poco precisas o irrelevantes.
 
-## Sistemas de recomendación con RL
+## 2 Sistemas de recomendación con RL
 
 <!-- Sistemas de recomendación con RL:
     - Que es el reinforce learning
@@ -178,6 +181,16 @@ Hemos visto que con este paradigma se pueden resolver los problemas que tenían 
 4. **Recompensa ruidosa:** esto se refiere a que tenemos señales de recompensa muy ruidosas y dispersas prodecentes de los usuarios. Esto puede ocurrir por una gran variedad de motivos, como podría ser la falta de información del contexto, que el usuario se sienta incómodo proporcionando recomendación o simplemente el usuario no sepa lo que quiere. <!-- TODO: BUSCAR MEJOR FRASE Debido a esto, habrá que buscar alguna forma de minimizar ese ruido. -->
 
 <!-- ## Aplicaciones -->
+
+## X. Aplicaciones
+
+<!-- 
+Aplicaciones:
+
+RecSIM: google research
+https://github.com/fuxiAIlab/RL4RS
+https://github.com/awarebayes/RecNN
+ -->
 
 ## Caso práctico: RL para sistemas de recomendación de vídeos de youtube
 
