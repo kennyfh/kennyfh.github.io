@@ -41,7 +41,7 @@ Dentro de los sistemas de recomendación existen diversas técnicas que nos brin
 
 ![Matrix](recommender_systems.png "Técnicas de recomendación")
 
-Por tradición, estos sistemas se han agrupado en dos paradigmas muy importantes: **basados en filtro colaborativo** y otros **basados en contenido**.
+Por tradición, estos sistemas se han agrupado en dos paradigmas muy importantes: **basados en filtro colaborativo** y  **basados en contenido**.
 
 
 #### 1.1.1 Sistemas de recomendación basados en filtro colaborativo
@@ -58,7 +58,7 @@ En la figura anterior, se puede observar que tenemos una matriz donde las column
 
 Las casillas que no están con ninguna valoración significan que el usuario aún no ha probado ese producto. Por lo cual nuestro objetivo es encontrar un modelo que prediga las interacciones que faltan en la matriz.
 
-Dentro de este paradigma existen dos tipos de filro colaborativo:
+Dentro de este paradigma existen dos tipos de filtro colaborativo: **basados en memoria** y **basados en modelos**
 
 <!--
 (https://impulsatek.com/11-sistemas-de-recomendacion-y-modelos-de-aprendizaje-basados-en-grafos/#Sistemas_basados_en_filtrado_colaborativo)
@@ -120,7 +120,7 @@ Además de las métricas, podemos evaluar el sistema por su cobertura, que se re
 
 ### 1.3 Limitaciones del aprendizaje supervisado
 
-Estos métodos tradicionales de recomendación están muy influenciados por técnicas de aprendizaje automático, y estos presentan algunas limitaciones que discutiremos a continuación: 
+Estos métodos tradicionales de recomendación están muy influenciados por técnicas de aprendizaje automático, y estos presentan algunas limitaciones que discutiremos a continuación.
 
 #### Recomendación miope
 
@@ -136,38 +136,124 @@ Otro problema que nos podemos encontrar en estos sistemas es que no tienen en cu
 
 ## 2 Sistemas de recomendación con RL
 
-<!-- Sistemas de recomendación con RL:
-    - Que es el reinforce learning
-    - Aplicaciones de sistemas con RL -->
-
 Viendo las limitaciones que tiene el usar los sistemas de recomendación tradicionales, podemos hacer uso de aprendizaje por refuerzo para darle un nuevo enfoque al recomendar contenido a los usuarios.
 
-<!-- Podríamos decir  "dinámicas del usuario para opimizarsu utilidad a largo plazo -->
+<!-- Podríamos decir  "dinámicas del usuario para opimizar su utilidad a largo plazo -->
 El objetivo sería asegurar y descubrir las preferencias dinámicas del usuario para maximizar su satisfacción dentro de la plataforma, esto es posible con el paradigma del aprendizaje por refuerzo, debido a que es capaz de aprender contínuamente y equilibrar el mostrarle tanto contenido relevante para el usuario como presentarle contenido novedoso que le genere nuevos intereses.
 
 Aunque obviamente aplicar este paradigma no es tan sencillo, ya que nos encontraremos una serie de desafíos que vamos a tener que resolver.
 
-### ¿Qué es el aprendizaje por refuerzo?
+### 2.1 ¿Qué es el aprendizaje por refuerzo?
 
-El aprendizaje por refuerzo (Reinforce Learning en inglés) es la técnica más cercana al aprendizaje humano que se pueden conseguir en los sistemas actuales. Este paradigma consiste en que un agente (como podría ser un robot o una máquina) aprende a tomar acciones en un entorno mediante la retroalimentación en forma de recompensas o castigos. 
+El aprendizaje por refuerzo (Reinforce Learning en inglés) es la técnica más cercana al aprendizaje humano que se pueden conseguir en los sistemas actuales. 
 
-Al agente se le coloca en un entorno desconocido, donde debe tomar decisiones para alcanzar un objetivo específico, que mediante prueba y error, el agente aprende cuales acciones llevan a un resultado positivo, por lo cual las irá repitiendo, mientras que las acciones que lo lleven por un resultado negativo las va a ir evitando. 
+El paradigma del Aprendizaje por Refuerzo consiste en modelar la interacción en un agente (como podría ser un robot  o una máquina) en un entorno, a través del tiempo, para guiar su aprendizaje.
 
-Como hemos hablado, este paradigma tiene una gran variedad de aplicaciones como en el procesamiento del lenguaje natural, marketing o robots automatizados. Pero veremos que puede tener un uso muy interesante en los sistemas de recomendaciones.
+![Matrix](RL_image.png "Interacción de un agente y un entorno en RL")
 
-### Retos al aplicar aprendizaje por refuerzo en sistemas de recomendación
+El agente se le coloca en un entorno desconocido, donde debe tomar decisiones para alcanzar un objetivo específico, que mediante prueba y error, el agente aprende cuales acciones llevan a un resultado positivo, por lo cual las irá repitiendo, mientras que las acciones que lo lleven por un resultado negativo las va a ir evitando.
+
+En estos sistemas, se suele definir el conjunto de estados posibles como $S$, siendo uno de estos estados $s \in S$. El conjunto de acciones posibles $A$, siendo $a \in A$, y el de recompensas posibles como $R$, siendo una de esas recompensas $r \in R$.
+
+El Aprendizaje por refuerzo tiene una gran variedad de aplicaciones como en el procesamiento del lenguaje natural, marketing o robots automatizados. Pero veremos que puede tener un uso muy interesante en los sistemas de recomendaciones.
+
+### 2.2 Elementos del Aprendizaje por Refuerzo
+<!-- Richard S. Sutton y Andrew G. Barto. Reinforcement Learning: An Introduction.
+Second. The MIT Press, 2018. url: http://incompleteideas.net/book/thebook-2nd.html -->
+
+Además del agente y el entorno, es importante identificar otros elementos importantes dentro del RL.
+
+#### Política
+
+Una política es una función que determina que acción tomar en un estado determinado. Puede ser una política estática, que indica una única acción con probabilidad 1, o una política estocástica, que define una distribución de probabilidades sobre varias acciones para cada estado.
+
+La política es el centro del RL debido a que es en ella donde se almacena el aprendizaje del agente. El objetivo es aprender una política óptima
+
+#### Señales de recompensa
+
+Durante las iteraciones de un sistema de Aprendizaje Automático, el entorno envía al agente un número llamado recompensa, que se puede definir como función del estado $f : S \rightarrow R$. 
+
+El único objetivo del agente es maximizar esta recompensa total que recibe a largo plazo como una heurística que puede usarse como métrica de calidad en un momento $t$ determinado.
+
+La recompensa solo depende del estado actual del entorno y el único modo en que el agente puede influir en ella es a través de las acciones que toma, las cuales producen un cambio de estado y una recompensa diferente por ser parte del entorno.
+
+#### Funciones de valor
+
+Las recompensas del entorno son inmediatas, que se otorgan al estado actual. Sin embargo, existe una variante análoga a la recompensa que tiene en cuenta la deseabilidad a largo plazo. Esta se denomina **función de valor**, y sería la cantidad total de recompensa que un agente espera acumular, partiendo desde ese estado.
+
+Viéndolo desde la perspectiva humana, las recompensas serían algo como el placer (si es alto) o el dolor (si es bajo), sensaciones momentáneas, mientras que los valores de la función de valor corresponden a una evaluación más detallada y con visión a futuro de nuestra satisfacción o incomodidad con el estado actual del entorno.
+
+### 2.3 Algoritmos de RL en sistemas de recomendación
+
+El objetivo que tenemos al hacer uso del Aprendizaje por Refuerzo en los sistemas de recomendación es encontrar la política óptima que maximice la recompensa esperada obtenida por el agente a lo largo del tiempo, y así poder brindar recomendaciones más precisas y personalizadas para los usuarios.
+
+Los algoritmos más populares son los pertenecientes a la rama de Programación Dinámica como pueden ser **Polity iteration** o el **Value iteration**, pero estos no se adecúan al paradigma de la recomendación. Esto es debido a que en estos algoritmos es necesario conocer de antemano las recompensas y las probabilidades. Sin embargo, este conocimiento previo no es posible en los problemas de recomendación, ya que las recompensas no se conoce la recompensa de la acción hasta que se realiza y no se conocen las probabilidades de transición a priori, ya que no sabemos si un producto recomendado le gustará al usuario hasta que se realice esa recomendación.
+
+Otra rama también muy popular son los algoritmos **libres de modelo**, donde no están ligados a ningún modelo en específico. Entre los más populares nos encontramos a [Q-learning](https://www.cs.us.es/~fsancho/Cursos/SVRAI/RL.md.html#m%C3%A9todoslibresdemodelos/q-learning), que para nuestro problema de recomendación es inviable en términos computacionales. Esto es debido a que el espacio de estados y el de acciones sería demasiado grandes.
+
+A continuación vamos a comentar algunos algoritmos usados en sistemas de recomendación:
+
+#### 2.3.1 Deep Q Learning
+
+Como se ha descrito anteriormente, usar el método clásico de Q-Learning en problemas reales es inviable cuando hablamos desde el punto de vista de los recursos computacionales, por lo cual, en 2015 DeepMind presenta el DQN (Deep Q Network) y nace el campo de estudio que hoy conocemos como el **Deep Reinforcement Learning**.
+
+<!-- https://www.analyticsvidhya.com/blog/2019/04/introduction-deep-q-learning-python/ -->
+
+![Matrix](deepQLearning.png "Q-Learning vs DQN")
+
+Esta nueva arquitectura consiste en hacer uno de una red neuronal profunda en lugar de una tabla para estimar la función Q, lo que resulta más eficiente en términos de memoria.
+
+<!-- https://arxiv.org/pdf/1312.5602.pdf -->
+##### Deep Q Learning con repetición de la experiencia
+
+La DQN incluye la técnica llamada **experience replay**, que consiste en lugar de descartar la información obtenida después de cada interacción del agente con el entorno, la información se almacena en una memoria y se emplea para entrenar el modelo posteriormente. Con esto, nos aseguramos de aprovechar la información obtenida y de mejorar el aprendizaje.
+
+<!-- https://arxiv.org/abs/1509.06461 -->
+##### Double Deep Q-Learning
+
+El Double DQN es una variante del algoritmo DQN donde se aborda un problema conocido como la **sobrestimación en el aprendizaje por refuerzo**. Este problema ocurre cuando los valores Q que aprende piensan que van a obtener una recompensa mayor de la que en realidad obtendrá.
+
+Double DQN soluciona este problema al emplear dos redes neuronales diferentes, una para seleccionar la acción y otra para evaluar la acción seleccionada. 
+
+<!-- https://rubikscode.net/2021/07/20/introduction-to-double-q-learning/ -->
+
+![Matrix](DoubleDQN.png "Double DQN")
+
+La red que elige la acción se actualizará con mayor frecuencia, mientras que la red que evalua la acción se actualiza con menor frecuencia. Esto nos permite evitar la sobrestimación y mejorar la calidad de la política de acción.
+
+<!-- https://arxiv.org/abs/1511.06581 -->
+<!-- https://markelsanz14.medium.com/introducci%C3%B3n-al-aprendizaje-por-refuerzo-parte-4-double-dqn-y-dueling-dqn-b24ac0a5a46c -->
+##### Dueling Deep Q-Learning
+
+El Dueling DQN es una variante del algoritmo DQN que propone una nueva forma de calcular los valores Q.
+
+En esta técnica la red neuronal se divide en dos partes: una encargada de estimar la función de valor del estado $V(s)$, y otra parte se encarga de estimar la función de valor-acción $A(s,a)$. 
+
+La capa final combina ambos valores a través de una agregación específica, que permite ajustar el valor Q final. Este enfoque permite permite en algunos casos mejorar la eficacia del aprendizaje. No obstante, entrenar la red neuronal de esta manera se hace un problema “inidentificable”.
+
+Esto se puede solucionar forzando a que el valor Q más alto sea igual a V, y que el valor más alto en la función de ventaja sea cero, mientras que los demás valores son negativos.
+
+#### Soft Actor-Critic (SAC)
+
+### REINFORCE Top-K Off-Policy Correction
+
+### 2.4 Retos al aplicar aprendizaje por refuerzo en sistemas de recomendación
 
 Hemos visto que con este paradigma se pueden resolver los problemas que tenían los sistemas tradicionales, pero, ahora vamos a hablar de los diferentes retos que nos podríamos encontrar a la hora de poner en práctica este método.
 
-1. **Gran espacio de acción:** se refiere a la cantidad de posibles acciones que un sistema de recomendación basado por refuerzo debe tomar en momento determinado.
+#### Gran espacio de acción 
 
-    Por ejemplo, si quisieramos desarrollar un sistema de recomendación que recomiende vídeos de Youtube a un usuario, el espacio de estados serían la gigantesca cantidad de vídeos disponibles en el sitio.
+Se refiere a la cantidad de posibles acciones que un sistema de recomendación basado por refuerzo debe tomar en momento determinado.
 
-    El gran espacio de estados representa un enorme desafío para el desarrollo del sistema, debido a que cuanto mayor sea el espacio de estados, más compleja será la tarea de aprender las preferencias del problema y seleccionar los productos (por ejemplo, los vídeos de Youtube) más adecuados para recomendar.
+Por ejemplo, si quisieramos desarrollar un sistema de recomendación que recomiende vídeos de Youtube a un usuario, el espacio de estados serían la gigantesca cantidad de vídeos disponibles en el sitio.
 
-2. **Exploración costosa:** la exploración puede ser costosa en estos sistemas debido a la necesidad de probar diferentes acciones y adaptarse a los cambios en los gustos y preferencias del usuario.
+El gran espacio de estados representa un enorme desafío para el desarrollo del sistema, debido a que cuanto mayor sea el espacio de estados, más compleja será la tarea de aprender las preferencias del problema y seleccionar los productos (por ejemplo, los vídeos de Youtube) más adecuados para recomendar.
 
-    Aún así es importante hacer una buena exploración, debido a que si el recomendador solo te muestra contenido aleatorio, podría generar una mala experiencia al usuario.
+#### Exploración costosa
+
+La exploración puede ser costosa en estos sistemas debido a la necesidad de probar diferentes acciones y adaptarse a los cambios en los gustos y preferencias del usuario.
+
+Aún así es importante hacer una buena exploración, debido a que si el recomendador solo te muestra contenido aleatorio, podría generar una mala experiencia al usuario.
 
 
 <!-- 3. **Aprendizaje fuera de la política:** el aprendizaje fuera de la política o también conocido como off-policy es una técnica usada en aprendizaje por refuerzo que permite al sistema aprender de experiencias pasadas diferentes a la política actual, mejorando así su habilidad para poder adaptarse a situaciones no previstas anteriormente.
@@ -175,12 +261,15 @@ Hemos visto que con este paradigma se pueden resolver los problemas que tenían 
       El detalle es que implementar esta técnica puede ser muy desafiante debido a la complejidad en la selección y procesamiento de los datos de entrenamiento, como complicado de ajstar  -->
 
 
-3. **Observabilidad parcial:** cuando estamos construyendo el sistema de recomendación, el usuario no nos informa explícitamente lo que le interesa y debemos inferir ese interés del usuario a partir de las actividades que realiza en la plataforma.
+#### Observabilidad parcial
+
+Cuando estamos construyendo el sistema de recomendación, el usuario no nos informa explícitamente lo que le interesa y debemos inferir ese interés del usuario a partir de las actividades que realiza en la plataforma.
 
 
-4. **Recompensa ruidosa:** esto se refiere a que tenemos señales de recompensa muy ruidosas y dispersas prodecentes de los usuarios. Esto puede ocurrir por una gran variedad de motivos, como podría ser la falta de información del contexto, que el usuario se sienta incómodo proporcionando recomendación o simplemente el usuario no sepa lo que quiere. <!-- TODO: BUSCAR MEJOR FRASE Debido a esto, habrá que buscar alguna forma de minimizar ese ruido. -->
+#### Recompensa ruidosa
 
-<!-- ## Aplicaciones -->
+Se refiere a que tenemos señales de recompensa muy ruidosas y dispersas prodecentes de los usuarios. Esto puede ocurrir por una gran variedad de motivos, como podría ser la falta de información del contexto, que el usuario se sienta incómodo proporcionando recomendación o simplemente el usuario no sepa lo que quiere. <!-- TODO: BUSCAR MEJOR FRASE Debido a esto, habrá que buscar alguna forma de minimizar ese ruido. -->
+
 
 ## X. Aplicaciones
 
