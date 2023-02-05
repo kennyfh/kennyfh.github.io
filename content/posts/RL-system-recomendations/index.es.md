@@ -233,9 +233,41 @@ La capa final combina ambos valores a través de una agregación específica, qu
 
 Esto se puede solucionar forzando a que el valor Q más alto sea igual a V, y que el valor más alto en la función de ventaja sea cero, mientras que los demás valores son negativos.
 
-#### Soft Actor-Critic (SAC)
+<!--
+DEFIENDE QUE LE HA SIDO UTIL PARA DEMOSTRAR QUE SE PUEDE USAR
+ https://arxiv.org/pdf/2006.05779.pdf
+ 
+ SAC: https://bair.berkeley.edu/blog/2018/12/14/sac/
+  -->
+#### 2.3.2 Soft Actor-Critic (SAC)
+
+Este es un algoritmo de Aprendizaje por Refuerzo de modelo libre y off-policy desarrollado por expertos de UC Berkeley y Google donde se centra en maximizar tanto la esperanza del retorno como la esperanza de la entropía de la política
+<!-- , esto le permite explorar de manera más eficiente el espacio de acción. -->
+
+Esta técnica se implementa parametrizando una política gaussiana y una función Q con una red neuronal, y optimizándolos mediante programación dinámica aproximada
+
 
 ### REINFORCE Top-K Off-Policy Correction
+
+<!-- 
+Docs importantes:
+
+Explicación palabra REINFORCE: https://www.analyticsvidhya.com/blog/2020/11/reinforce-algorithm-taking-baby-steps-in-reinforcement-learning/
+
+Explicación del paper original: https://medium.com/@yogesh.patodia/recommender-system-using-reinforcement-learning-849308b615bf
+
+
+PAPER: https://arxiv.org/pdf/1812.02353.pdf
+ -->
+
+El *REINFORCE Top-K Off-Policy Correction* es un algoritmo basado en *REINFORCE*. Esta técnica hace uso de los datos registrados y los emplea como una política de comportamiento para generar una nueva política objetiva.
+
+Sin embargo, como los datos provienen del modelo mismo, están altamente sesgados, por lo cual, este algoritmo aprende de los datos sesgados para corregir esos sesgos.
+
+También, se introduce la corrección off-policy Top-k, en la que el agente aprende a maximizar K recompensas en lugar de una sola recompensa y elegir el TOP-K. 
+
+La política aprendida con corrección TOP-K permite recomendar dos artículos de alto valor al usuario, lo que tabién aumenta el valor total acumulado.
+
 
 ### 2.4 Retos al aplicar aprendizaje por refuerzo en sistemas de recomendación
 
