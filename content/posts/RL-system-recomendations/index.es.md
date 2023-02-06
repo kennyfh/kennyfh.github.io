@@ -318,8 +318,6 @@ https://github.com/fuxiAIlab/RL4RS
 
 La principal innovación es la solución del aprendizaje en línea, es decir, sin necesidad de seguir una política establecida previamente. Además, hace uso de *embeddings* generados dinámicamente, lo que significa que los vectores de representación de los elementos (como en ese caso noticias) se crean y actualizan en tiempo real, permitiendo una representación más precisa y actualizada de los elementos.
 
-<!-- Además, esta librería cuenta con una serie de algoritmos por refuerzo, donde el usuario tendrá el control total sobre el nivel de abstracción que prefiera. -->
-
 #### 3.1.1 Características
 
 - **Control sobre el nivel de abstracción**: puede importar un algoritmo completo y decirle que entrene, puede importar redes y su función de aprendizaje por separado, crear un cargador personalizado para su tarea, o puede definirlo todo tu mismo. Además de incluso poder definir tus propios datos.
@@ -396,6 +394,48 @@ for epoch in range(n_epochs):
 
 Para más información, consultar su documentación oficial [aquí](https://recnn.readthedocs.io/en/latest/).
 
+### 3.2 RL4RS
+<!-- https://github.com/fuxiAIlab/RL4RS -->
+
+[RL4RS](https://github.com/fuxiAIlab/RL4RS) es un sistema de recomendación basado en Aprendizaje por Refuerzo para profesionales e investigadores.
+
+Esta librería busca solucionar los problemas que suelen tener los sistemas de recomendación basados en RL como la brecha con la realidad y la falta de validación antes del despliegue. 
+
+#### 3.2.1 Características 
+
+- **Herramienta de comprensión de datos:** RL4RS proporciona una herramienta de comprensión de datos para probar el uso adecuado de RL en conjuntos de datos de sistemas de recomendación. 
+
+- Esta librería es compatible con bibliotecas líderes en RL como RLlib y Tianshou, y proporciona códigos de ejemplo de algoritmos libres de podemos para entornos discretos como continuos, y también la implementación de  algoritmos de Aprendizaje por Refuerzo fuera de línea.
+
+- **API fácil de usar y escalable:** La librería RL4RS tiene una estructura de código fácil de usar y escalable, con una estructura de código de bajo acoplamiento para reducir el acoplamiento y un entorno de gym basado en archivos que permite una muestra aleatoria y acceso secuencial a conjuntos de datos grandes y puede ser extendido a sistemas de archivos distribuidos. Además, soporta Vector Env y está encapsulado en una interfaz HTTP para ser implementado en varios servidores y acelerar la generación de muestras.
+
+#### 3.2.2 Primeros pasos
+
+##### Importar las librerías
+
+```
+import gym
+from rl4rs.env.slate import SlateRecEnv, SlateState
+```
+
+##### Configuramos el entorno de simulación
+
+```
+sim = SlateRecEnv(config, state_cls=SlateState)
+env = gym.make('SlateRecEnv-v0', recsim=sim)
+```
+
+##### Entrenamos
+
+```
+for i in range(epoch):
+    obs = env.reset()
+    for j in range(config["max_steps"]):
+        action = env.offline_action
+        next_obs, reward, done, info = env.step(action)
+        if done[0]:
+            break
+```
 
 ## 4. Caso práctico: RL para sistemas de recomendación de vídeos de youtube
 
