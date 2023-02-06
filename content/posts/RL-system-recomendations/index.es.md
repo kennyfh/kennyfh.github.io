@@ -247,7 +247,7 @@ Este es un algoritmo de Aprendizaje por Refuerzo de modelo libre y off-policy de
 Esta técnica se implementa parametrizando una política gaussiana y una función Q con una red neuronal, y optimizándolos mediante programación dinámica aproximada
 
 
-### REINFORCE Top-K Off-Policy Correction
+### 2.3.3 REINFORCE Top-K Off-Policy Correction
 
 <!-- 
 Docs importantes:
@@ -303,26 +303,110 @@ Cuando estamos construyendo el sistema de recomendación, el usuario no nos info
 Se refiere a que tenemos señales de recompensa muy ruidosas y dispersas prodecentes de los usuarios. Esto puede ocurrir por una gran variedad de motivos, como podría ser la falta de información del contexto, que el usuario se sienta incómodo proporcionando recomendación o simplemente el usuario no sepa lo que quiere. <!-- TODO: BUSCAR MEJOR FRASE Debido a esto, habrá que buscar alguna forma de minimizar ese ruido. -->
 
 
-## X. Aplicaciones
+## 3. Aplicaciones
 
 <!-- 
 Aplicaciones:
 
 RecSIM: google research
 https://github.com/fuxiAIlab/RL4RS
-https://github.com/awarebayes/RecNN
  -->
 
-## Caso práctico: RL para sistemas de recomendación de vídeos de youtube
+### 3.1 RecNN: recommendation toolkit
+
+[RecNN](https://github.com/awarebayes/RecNN) es una librería enfocada al Aprendizaje por Refuerzo en sistemas de recomendación de noticias.
+
+La principal innovación es la solución del aprendizaje en línea, es decir, sin necesidad de seguir una política establecida previamente. Además, hace uso de *embeddings* generados dinámicamente, lo que significa que los vectores de representación de los elementos (como en ese caso noticias) se crean y actualizan en tiempo real, permitiendo una representación más precisa y actualizada de los elementos.
+
+<!-- Además, esta librería cuenta con una serie de algoritmos por refuerzo, donde el usuario tendrá el control total sobre el nivel de abstracción que prefiera. -->
+
+#### 3.1.1 Características
+
+- **Control sobre el nivel de abstracción**: puede importar un algoritmo completo y decirle que entrene, puede importar redes y su función de aprendizaje por separado, crear un cargador personalizado para su tarea, o puede definirlo todo tu mismo. Además de incluso poder definir tus propios datos.
+
+- Módulo de representación de estado con varios métodos.
+
+- El **aprendizaje** se basa en un ambiente secuencial o de marco que admite datos de longitud variable, como ML20M. La secuencia (seq) es una secuencia completa de tamaño dinámico (en desarrollo), mientras que el marco (frame) es solo un marco estático.
+
+- **Carga paralela de datos con Modin (Dask / Ray) y almacenamiento en caché**
+
+- Soporte de la librería Pytorch 1.7 con visualización de *Tensorboard*.
+
+#### 3.1.2 Primeros pasos
+
+##### Importar la librería
+
+```
+import recnn
+```
+
+#### Configuramos el entorno
+Cuando trabajamos con entornos de recomendación, tenemos la opción de usar entradas de longitud estática o series de tiempo de longitud dinámica con codificadores secuenciales.
+
+En este caso vamos a usar la longitud estática a través de la clase ```FrameEnv```.
+
+```
+frame_size = 10
+batch_size = 25
+env = recnn.data.env.FrameEnv("ml20_pca128.pkl","ml-20m/ratings.csv" frame_size, batch_size)
+```
+
+#### Obtenemos los datos
+
+```
+train = env.train_batch()
+test = env.train_batch()
+state, action, reward, next_state, done = recnn.data.get_base_batch(train, device=torch.device('cpu'))
+
+```
+
+#### Inicializamos las redes principales
+
+```
+value_net  = recnn.nn.Critic(1290, 128, 256, 54e-2)
+policy_net = recnn.nn.Actor(1290, 128, 256, 6e-1)
+
+```
+
+#### Intentamos recomendar
+
+```
+recommendation = policy_net(state)
+value = value_net(state, recommendation)
+```
+
+#### Elegimos importar un algoritmo de RL a nuestra elección
+
+```
+ddpg = recnn.nn.DDPG(policy_net, value_net)
+plotter = recnn.utils.Plotter(ddpg.loss_layout,[['value','policy']])
+```
+
+
+#### Empezamos a que aprenda nuestro algoritmo
+
+```
+for epoch in range(n_epochs):
+        for batch in tqdm(env.train_dataloader):
+            loss = ddpg.update(batch, learn=True)
+            plotter.log_losses(loss)
+            ddpg.step()
+
+```
+
+Para más información, consultar su documentación oficial [aquí](https://recnn.readthedocs.io/en/latest/).
+
+
+## 4. Caso práctico: RL para sistemas de recomendación de vídeos de youtube
 
 En esta sección vamos a realizar un análisis de un caso real de implementación de un sistema de recomendación basado en aprendizaje por refuerzo. En este caso será el de recomendación de videos de youtube, desarrollado por la empresa Google.
 
 
-### Introducción
+### 4.1 Introducción
 
 El acceso a contenido en línea se ha convertido en una necesidad entre las plataformas más populares se encuentra Youtube, donde millones de personas consumen vídeos cada día. No obstante, el hacer uso de los sistemas tradicionales nos podía producir que los usuarios acaben encerrados en una "burbuja"  o dar recomendaciones irrelevantes que hagan que se pierda la confianza en el usuario, por lo cual el objetivo es adaptar y descubrir las preferencias dinámicas del usuario para poder optimizar su utilidad a largo plazo, y esto podremos conseguirlo haciendo uso del aprendizaje por refuerzo.
 
-### Generación de candidatos
+### 4.2 Generación de candidatos
 
 El sistema que produce las recomendaciones de los vídeos de Youtube es un recomendador de varias etapas, que selecciona docenas de videos para los usuarios a partir de un corpus formado por miles de millones de vídeos.
 
@@ -333,13 +417,13 @@ En este estudio solamente se han centrado en la etapa de **generación de candid
 
 Habrá algunos desafíos que se han encontrado para construir esta estructura, ya que el sistema de recomendación debe enfrentarse a los miles de millones de usuarios con preferencias que van cambiando a lo largo del tiempo, a miles de millones de vídeos que no tienen una gran cantidad de visitas, pero son relevantes para un pequeño grupo de usuarios (distribución de lanzamiento), o también comentarios de usuario ruidosos y dispersos. 
 
-### Aprendizaje por refuerzo en sistemas de recomendación
+### 4.3 Aprendizaje por refuerzo en sistemas de recomendación
 
 Una vez hayamos entendido el significado de la generación de candidatos, vamos a basarlo en aprendizaje por refuerzo.
 
 El objetivo es construir agentes que realicen acciones en un entorno para maximizar una noción de recompensa acumulativa, por lo que vamos a considerar nuestro **agente** al candidato generador, los **estados** serán el interés de los usuarios, así como los contactos de recomendación, la **recompensa** será la satisfacción del usuario y finalmente las **acciones** que pueden tomar el agente es elegir y proponer videos para ser incluidos en un catálogo con millones de videos.
 
-### Construcción del modelo
+### 4.4 Construcción del modelo
 
 En esta sección vamos a ver como los trabajadores de Youtube han ido construyendo el agente de recomendación de vídeos hacienddo uso de aprendizaje por refuerzo.
 
@@ -348,8 +432,6 @@ En esta sección vamos a ver como los trabajadores de Youtube han ido construyen
 La fuente de datos que se ha utilizado para construir el agente es la trayectoria del usuario, es decir, una secuencia de actividades que el usuario ha realizado en la plataforma ( como los videos que ha visto, las búsquedas realizadad, etc.).
 
 ![Matrix](agent_reward.png "Eventos de usuario")
-
-
 
 Esta información se divide en la **trayectoria secuencial del pasado**,compuesta por las actividades anteriores a las recomendaciones del agente, y la **trayectoria secuencial del futuro**, con la información sobre las actividades que el usuario ha realizado después de recibir las recomendaciones del agente.
 
@@ -376,7 +458,7 @@ A causa de esto, se podría decir que el aprnedizaje por refuerzo está muy cone
 
 Usa una técnica de muestreo para abordar el espacio de acciones muy grande y ejecuta una búsqueda rápida en vecindarios para reducir el tiempo de procesamiento.
 
-### Resolución de las limitaciones del aprendizaje automático
+### 4.5 Resolución de las limitaciones del aprendizaje automático
 
 En esta parte vamos a ver como han podido solucionar las dos limitaciones que tienen los sistemas de recomendación tradicionales
 
@@ -391,6 +473,6 @@ Cuando se hicieron experimentos, la incorporación de estas recompensas futuras 
 
 Este sistema solo tiene acceso a los datos de registro que son generados por un agente que se va actualizando cada 5 horas, lo que significa que la política de los agentes podría ser muy diferente de la política objetivo que se está tratando de aprender, por lo tanto, el equipo sigue estudiando como hacer frente al sesgo del sistema causado por solo tener acceso a estos datos de registro.
 
-## Conclusiones
+## 5. Conclusiones
 
-## Referencias
+## 6. Referencias
