@@ -41,10 +41,10 @@ Dentro de los sistemas de recomendación existen diversas técnicas que nos brin
 
 ![Matrix](recommender_systems.png "Técnicas de recomendación")
 
-Por tradición, estos sistemas se han agrupado en dos paradigmas muy importantes: **basados en filtro colaborativo** y  **basados en contenido**.
+Por tradición, estos sistemas se han agrupado en dos paradigmas muy importantes: **basados en filtrado colaborativo** y  **basados en contenido**.
 
 
-#### 1.1.1 Sistemas de recomendación basados en filtro colaborativo
+#### 1.1.1 Sistemas de recomendación basados en filtrado colaborativo
 
 Este método construye una matriz de interacción usuario-elemento, que recoge las interacciones previas de los usuarios con los elementos.
 
@@ -58,7 +58,7 @@ En la figura anterior, se puede observar que tenemos una matriz donde las column
 
 Las casillas que no están con ninguna valoración significan que el usuario aún no ha probado ese producto. Por lo cual nuestro objetivo es encontrar un modelo que prediga las interacciones que faltan en la matriz.
 
-Dentro de este paradigma existen dos tipos de filtro colaborativo: **basados en memoria** y **basados en modelos**
+Dentro de este paradigma existen dos tipos de filtrado colaborativo: **basados en memoria** y **basados en modelos**
 
 <!--
 (https://impulsatek.com/11-sistemas-de-recomendacion-y-modelos-de-aprendizaje-basados-en-grafos/#Sistemas_basados_en_filtrado_colaborativo)
@@ -80,17 +80,17 @@ La similitud (o distancia) entre usuarios o contenido puede ser calculado emplea
 En cambio, estas técnicas desarrollan modelos haciendo uso de algoritmos de aprendizaje automático sobre la matriz de utilidad para realizar una predicción de las valoraciones de los usuarios en los elementos no valorados.
 
 
-##### Ventajas y desventajas de los sistemas basados en filtro colaborativo
+##### Ventajas y desventajas de los sistemas basados en filtrado colaborativo
 
 Estos sistemas tienen la capacidad para recomendar productos incluso si no hay valoraciones de los usuarios, además de adaptarse a los cambios en las preferencias de los usuarios y proporcionar recomendaciones relevantes sin compartir información del perfil del usuario.
 
-Entre las desventajas, podemos encontrarnos el problema del **comienzo en frío**, cuando un sistema de recomendación no tiene suficiente información sobre un usuario o un producto para hacer predicciones relevantes, el problema de **dispersión de los datos**, consecuencia de la falta de elementos valorados en nuestra base de datos, el problema de la **escalabilidad** asociado a que los cálculos crecen linealmente con el número de usuarios y elementos, y el problema de la **sinonimia**, cuando los sistemas tiene dificultades para distinguir entre productos muy similares.
+Entre las desventajas, podemos encontrarnos el problema del **arranque en frío** (cold start), cuando un sistema de recomendación no tiene suficiente información sobre un usuario o un producto para hacer predicciones relevantes, el problema de **dispersión de los datos**, consecuencia de la falta de elementos valorados en nuestra base de datos, el problema de la **escalabilidad** asociado a que los cálculos crecen linealmente con el número de usuarios y elementos, y el problema de la **sinonimia**, cuando los sistemas tiene dificultades para distinguir entre productos muy similares.
 
 #### 1.1.2 Sistemas de recomendación basados en contenido
 
 Esta técnica en lugar de basarse en el historial de acciones del usuario, estos métodos hacen uso de la información sobre el contenido de los productos para encontrar similitudes y poder recomendar productos similares a los que el usuario ya ha mostrado interés.
 
-Estos modelos pueden ser basados en el **modelo de espacio de espacio vectorial**, como podría ser la frecuencia de término - frecuencia inversa de documento (TF/idf), o **modelos probabilísticos**, como Naive Bayes, árboles de decisión o redes neuronales.
+Estos modelos pueden ser basados en el **modelo de espacio vectorial**, como podría ser la frecuencia de término - frecuencia inversa de documento (TF/idf), o **modelos probabilísticos**, como Naive Bayes, árboles de decisión o redes neuronales.
 
 Las ventajas que podemos decir de esta técnica es que no dependemos de la información de perfil de otros usuarios, debido a que uno influyen en las recomendaciones. Además, se tiene la capacidad de poder ajustar sus recomendaciones en un corto periodo de tiempo si el perfil de un usuario cambia como la de también proporcionar explicaciones sobre cómo se generaron las recomendaciones.
 
@@ -102,7 +102,7 @@ La calidad de un algoritmo de recomendación puede evaluarse haciendo uso de dis
 
 Dentro de las métricas para medir la precisión de estos sistemas se dividen en métricas de precisión estadística y apoyo a la precisión de la decisión.
 
-Las métricas de **precisión estadística** comparan directamente las valoraciones predicas con las valoraciones reales. Una de las métricas más importantes para evaluar este tipo de sistemas sería el Error Medio Absoluto (o *Mean Absolute Error* (MAE) en inglés). Constaría de la siguiente definición:
+Las métricas de **precisión estadística** comparan directamente las valoraciones predecidas con las valoraciones reales. Una de las métricas más importantes para evaluar este tipo de sistemas serían el Error Medio Absoluto (o *Mean Absolute Error* (MAE) en inglés). Constaría de la siguiente definición:
 
 
 $$MAE = \frac{1}{N} \sum_{u,i}^{N} |p_{u,i} - r_{u,i}|$$
@@ -115,7 +115,7 @@ $$ P@K = \frac{|\text{Objetos relevantes en top K} |}{K}$$
 
 $$ R@K = \frac{|\text{Objetos relevantes en top K} |}{\text{Objetos relevantes}}$$
 
-Además de las métricas, podemos evaluar el sistema por su cobertura, que se refiere al porcentaje de items y usuarios para los cuales un sistema de recomendación puede proporcionar predicciones. La predicción puede ser prácticamente imposible si ningún usuario o pocos usuarios valoran un elemento. La cobertura puede reducirse definiendo vecindarios pequeños para los usuarios o productos.
+Además de las métricas, podemos evaluar el sistema por su cobertura, que se refiere al porcentaje de items y usuarios para los cuáles un sistema de recomendación puede proporcionar predicciones. La predicción puede ser prácticamente imposible si ningún usuario o pocos usuarios valoran un elemento. La cobertura puede reducirse definiendo vecindarios pequeños para los usuarios o productos.
 
 
 ### 1.3 Limitaciones del aprendizaje supervisado
@@ -134,7 +134,7 @@ El que ocurra esto puede llevar a que un usuario acabe encerrado en una "burbuja
 
 Otro problema que nos podemos encontrar en estos sistemas es que no tienen en cuenta factores adicionales como las preferencias del usuario o el sesgo del sistema, lo que puede resultar en recomendaciones poco precisas o irrelevantes.
 
-## 2 Sistemas de recomendación con RL
+## 2 Sistemas de recomendación basados en RL
 
 Viendo las limitaciones que tiene el usar los sistemas de recomendación tradicionales, podemos hacer uso de aprendizaje por refuerzo para darle un nuevo enfoque al recomendar contenido a los usuarios.
 
@@ -151,7 +151,7 @@ El paradigma del Aprendizaje por Refuerzo consiste en modelar la interacción en
 
 ![Matrix](RL_image.png "Interacción de un agente y un entorno en RL")
 
-El agente se le coloca en un entorno desconocido, donde debe tomar decisiones para alcanzar un objetivo específico, que mediante prueba y error, el agente aprende cuales acciones llevan a un resultado positivo, por lo cual las irá repitiendo, mientras que las acciones que lo lleven por un resultado negativo las va a ir evitando.
+El agente se le coloca en un entorno desconocido, donde debe tomar decisiones para alcanzar un objetivo específico, que mediante prueba y error, el agente aprende cuáles acciones llevan a un resultado positivo, por lo cual las irá repitiendo, mientras que las acciones que lo lleven por un resultado negativo las va a ir evitando.
 
 En estos sistemas, se suele definir el conjunto de estados posibles como $S$, siendo uno de estos estados $s \in S$. El conjunto de acciones posibles $A$, siendo $a \in A$, y el de recompensas posibles como $R$, siendo una de esas recompensas $r \in R$.
 
@@ -175,7 +175,7 @@ Durante las iteraciones de un sistema de Aprendizaje Automático, el entorno env
 
 El único objetivo del agente es maximizar esta recompensa total que recibe a largo plazo como una heurística que puede usarse como métrica de calidad en un momento $t$ determinado.
 
-La recompensa solo depende del estado actual del entorno y el único modo en que el agente puede influir en ella es a través de las acciones que toma, las cuales producen un cambio de estado y una recompensa diferente por ser parte del entorno.
+La recompensa solo depende del estado actual del entorno y el único modo en que el agente puede influir en ella es a través de las acciones que toma, las cuáles producen un cambio de estado y una recompensa diferente por ser parte del entorno.
 
 #### Funciones de valor
 
@@ -266,7 +266,7 @@ Sin embargo, como los datos provienen del modelo mismo, están altamente sesgado
 
 También, se introduce la corrección off-policy Top-k, en la que el agente aprende a maximizar K recompensas en lugar de una sola recompensa y elegir el TOP-K. 
 
-La política aprendida con corrección TOP-K permite recomendar dos artículos de alto valor al usuario, lo que tabién aumenta el valor total acumulado.
+La política aprendida con corrección TOP-K permite recomendar dos artículos de alto valor al usuario, lo que también aumenta el valor total acumulado.
 
 
 ### 2.4 Retos al aplicar aprendizaje por refuerzo en sistemas de recomendación
@@ -405,7 +405,7 @@ Esta librería busca solucionar los problemas que suelen tener los sistemas de r
 
 - **Herramienta de comprensión de datos:** RL4RS proporciona una herramienta de comprensión de datos para probar el uso adecuado de RL en conjuntos de datos de sistemas de recomendación. 
 
-- Esta librería es compatible con bibliotecas líderes en RL como RLlib y Tianshou, y proporciona códigos de ejemplo de algoritmos libres de podemos para entornos discretos como continuos, y también la implementación de  algoritmos de Aprendizaje por Refuerzo fuera de línea.
+- Esta librería es compatible con bibliotecas líderes en RL como RLlib y Tianshou, y proporciona códigos de ejemplo de algoritmos libres de modelos para entornos discretos como continuos, y también la implementación de  algoritmos de Aprendizaje por Refuerzo fuera de línea.
 
 - **API fácil de usar y escalable:** La librería RL4RS tiene una estructura de código fácil de usar y escalable, con una estructura de código de bajo acoplamiento para reducir el acoplamiento y un entorno de gym basado en archivos que permite una muestra aleatoria y acceso secuencial a conjuntos de datos grandes y puede ser extendido a sistemas de archivos distribuidos. Además, soporta Vector Env y está encapsulado en una interfaz HTTP para ser implementado en varios servidores y acelerar la generación de muestras.
 
