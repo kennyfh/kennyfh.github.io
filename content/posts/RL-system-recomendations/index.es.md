@@ -183,7 +183,20 @@ Las recompensas del entorno son inmediatas, que se otorgan al estado actual. Sin
 
 Viéndolo desde la perspectiva humana, las recompensas serían algo como el placer (si es alto) o el dolor (si es bajo), sensaciones momentáneas, mientras que los valores de la función de valor corresponden a una evaluación más detallada y con visión a futuro de nuestra satisfacción o incomodidad con el estado actual del entorno.
 
-### 2.3 Algoritmos de RL en sistemas de recomendación
+### 2.3 ¿Por qué usar RL en los algoritmos de recomendación?
+
+La utilización del Aprendizaje por Refuerzo (RL) en desarrollar sistemas de recomendación se puede justificar por la naturaleza secuencial de la interacción entre el usuario y el sistema. Este problema puede ser modelado como un proceso de Markov y solucionarlo mediante un algoritmo de RL.
+
+El Aprendizaje por Refuerzo posee 3 características únicas que no se encuentran en los sistemas de recomendación tradicionales:
+
+1. La capacidad de manejar la dinámica de la interacción secuencial entre el usuario y el sistema.
+
+2. La consideración del compromiso a largo plazo del usuario en la toma de decisiones.
+
+3. La posibilidad de optimizar la política de recomendación sin necesidad de calificaciones explícitas por parte del usuario."
+
+
+### 2.4 Algoritmos de RL en sistemas de recomendación
 
 El objetivo que tenemos al hacer uso del Aprendizaje por Refuerzo en los sistemas de recomendación es encontrar la política óptima que maximice la recompensa esperada obtenida por el agente a lo largo del tiempo, y así poder brindar recomendaciones más precisas y personalizadas para los usuarios.
 
@@ -193,7 +206,7 @@ Otra rama también muy popular son los algoritmos **libres de modelo**, donde no
 
 A continuación vamos a comentar algunos algoritmos usados en sistemas de recomendación:
 
-#### 2.3.1 Deep Q Learning
+#### 2.4.1 Deep Q Learning
 
 Como se ha descrito anteriormente, usar el método clásico de Q-Learning en problemas reales es inviable cuando hablamos desde el punto de vista de los recursos computacionales, por lo cual, en 2015 DeepMind presenta el DQN (Deep Q Network) y nace el campo de estudio que hoy conocemos como el **Deep Reinforcement Learning**.
 
@@ -239,7 +252,7 @@ DEFIENDE QUE LE HA SIDO UTIL PARA DEMOSTRAR QUE SE PUEDE USAR
  
  SAC: https://bair.berkeley.edu/blog/2018/12/14/sac/
   -->
-#### 2.3.2 Soft Actor-Critic (SAC)
+#### 2.4.2 Soft Actor-Critic (SAC)
 
 Este es un algoritmo de Aprendizaje por Refuerzo de modelo libre y off-policy desarrollado por expertos de UC Berkeley y Google donde se centra en maximizar tanto la esperanza del retorno como la esperanza de la entropía de la política
 <!-- , esto le permite explorar de manera más eficiente el espacio de acción. -->
@@ -247,7 +260,7 @@ Este es un algoritmo de Aprendizaje por Refuerzo de modelo libre y off-policy de
 Esta técnica se implementa parametrizando una política gaussiana y una función Q con una red neuronal, y optimizándolos mediante programación dinámica aproximada
 
 
-### 2.3.3 REINFORCE Top-K Off-Policy Correction
+### 2.4.3 REINFORCE Top-K Off-Policy Correction
 
 <!-- 
 Docs importantes:
@@ -307,7 +320,6 @@ Se refiere a que tenemos señales de recompensa muy ruidosas y dispersas prodece
 
 <!-- 
 Aplicaciones:
-
 RecSIM: google research
 https://github.com/fuxiAIlab/RL4RS
  -->
@@ -498,7 +510,7 @@ A causa de esto, se podría decir que el aprnedizaje por refuerzo está muy cone
 
 Usa una técnica de muestreo para abordar el espacio de acciones muy grande y ejecuta una búsqueda rápida en vecindarios para reducir el tiempo de procesamiento.
 
-### 4.5 Resolución de las limitaciones del aprendizaje automático
+### 4.5 Resolución de las limitaciones del Aprendizaje Automático
 
 En esta parte vamos a ver como han podido solucionar las dos limitaciones que tienen los sistemas de recomendación tradicionales
 
@@ -515,4 +527,28 @@ Este sistema solo tiene acceso a los datos de registro que son generados por un 
 
 ## 5. Conclusiones
 
+En conclusión, podemos decir que el uso del Aprendizaje por refuerzo en los sistemas de recomendación nos ofrecen características únicas que permiten brindar mejores sugerencias en comparación con los sistemas de recomendación tradicionales.
+
+Por otro lado, dentro de los sistemas de recomendación basados por refuerzo, los algoritmos tradicionales como la iteración de políticas o el Q-Learning no cumplen adecuadamente con las expectativas en el ámbito de la recomendación.
+
+De igual forma, existen librerías especializadas en la creación de entornos de recomendación basados en Aprendizaje por Refuerzo.
+
+Además, cabe destacar de que muchas plataformas digitales como Youtube, usan aprendizaje por Refuerzo para mejorar la precisión de sus algoritmos de recomendación.
+
+
 ## 6. Referencias
+
+- F.O. Isinkaye, Y.O. Folajimi, & B.A. Ojokoh (2015). Recommendation systems: Principles, methods and evaluation. Egyptian Informatics Journal, 16(3), 261-273.
+
+- Srinivasan, A. (2022, January 31). Recommendation Systems using Reinforcement Learning. Medium. https://medium.com/ibm-data-ai/recommendation-systems-using-reinforcement-learning-de6379eecfde
+
+- Mnih, V., Kavukcuoglu, K., Silver, D., Graves, A., Antonoglou, I., Wierstra, D., & Riedmiller, M. (2013). Playing Atari with Deep Reinforcement Learning. ArXiv: Learning. http://cs.nyu.edu/~koray/publis/mnih-atari-2013.pdf
+
+- Hasselt, H., Guez, A., & Silver, D.. (2015). Deep Reinforcement Learning with Double Q-learning.
+
+- Wang, Z., Schaul, T., Hessel, M., Hasselt, H., Lanctot, M., & Freitas, N.. (2015). Dueling Network Architectures for Deep Reinforcement Learning.
+
+- M Scherbina. (2019). RecNN: RL Recommendation with PyTorch.
+
+- Kai Wang, Zhene Zou, Yue Shang, Qilin Deng, Minghao Zhao, Runze Wu, Xudong Shen, Tangjie Lyu, & Changjie Fan (2021). RL4RS: A Real-World Benchmark for Reinforcement Learning based Recommender System. ArXiv, abs/2110.11073.
+- Association for Computing Machinery (ACM). (2019, March 28). “Reinforcement Learning for Recommender Systems: A Case Study on Youtube,” by Minmin Chen [Video]
