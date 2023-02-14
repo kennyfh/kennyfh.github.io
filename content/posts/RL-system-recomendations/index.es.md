@@ -30,7 +30,7 @@ En este estudio se discutirá los diferentes tipos de sistemas de recomendación
 
 ## 1. Sistemas de recomendación
 
-Los sistemas de recomendación (o llamados en inglés "recommender systems") son algoritmos que buscan sugerir contenido o productos relevantes al usuario, en base a sus preferencias y otras informaciones relevantes.
+Los **sistemas de recomendación** (o llamados en inglés "recommender systems") son algoritmos que buscan **sugerir contenido o productos** relevantes al usuario, en base a sus preferencias y otras informaciones relevantes.
 
 Estos sistemas son fundamentales en diferentes industrias (como el comercio electrónico o aplicaciones de entrenimiento multimedia) para descubrir el contenido que les interesaría al usuario, haciendo que aumente la probabilidad de que se retengan en la plataforma y generen ingresos para la empresa.
 
@@ -41,28 +41,20 @@ Dentro de los sistemas de recomendación existen diversas técnicas que nos brin
 
 ![Matrix](recommender_systems.png "Técnicas de recomendación")
 
-Por tradición, estos sistemas se han agrupado en dos paradigmas muy importantes: **basados en filtrado colaborativo** y  **basados en contenido**.
+Por tradición, estos sistemas se clasifican en dos categorías principales: aquellos que se basan en el **filtrado colaborativo** y aquellos que se basan en el **contenido**. Sin embargo, no se abordarán en este artículo las técnicas híbridas que combinan elementos de ambos enfoques.
 
 
 #### 1.1.1 Sistemas de recomendación basados en filtrado colaborativo
 
-Este método construye una matriz de interacción usuario-elemento, que recoge las interacciones previas de los usuarios con los elementos.
-
-Los elementos o items son los productos que se quieren recomendar al usuario (canciones, películas, libros, entre otros).
+Este método construye una matriz de interacción usuario-elemento, que recoge las interacciones previas de los usuarios con los elementos. Los elementos o items son los productos que se quieren recomendar al usuario (canciones, películas, libros, entre otros).
 
 Se hace uso de esta matriz para idenfiticar los perfiles similares en función de su proximidad y aprender de sus intereses para recomendar a los usuarios. 
 
 ![Matrix](matrix-user-element.png "Matriz de utilidad (o de puntuaciones)")
 
-En la figura anterior, se puede observar que tenemos una matriz donde las columnas son los productos que queremos valorar, y las filas son los usuarios que le dan una valoración a esos productos.
+En la figura anterior, se muestra una matriz en la que las columnas corresponden a los productos que se desean evaluar, mientras que las filas representan a los usuarios que han proporcionado valoraciones para estos productos. Aquellas celdas que no tienen un valor asignado denotan que el usuario aún no ha evaluado dicho producto. Por tanto, el objetivo es desarrollar un modelo que permita predecir las interacciones faltantes en la matriz.
 
-Las casillas que no están con ninguna valoración significan que el usuario aún no ha probado ese producto. Por lo cual nuestro objetivo es encontrar un modelo que prediga las interacciones que faltan en la matriz.
-
-Dentro de este paradigma existen dos tipos de filtrado colaborativo: **basados en memoria** y **basados en modelos**
-
-<!--
-(https://impulsatek.com/11-sistemas-de-recomendacion-y-modelos-de-aprendizaje-basados-en-grafos/#Sistemas_basados_en_filtrado_colaborativo)
--->
+Dentro del enfoque de filtrado colaborativo, se pueden identificar dos tipos de métodos: aquellos **basados en memoria**, que utilizan la información de valoraciones de usuarios/productos similares para realizar recomendaciones; y aquellos **basados en modelos**, que emplean técnicas de aprendizaje automático para crear un modelo que permita hacer predicciones precisas sobre las preferencias del usuario.
 
 ##### Basados en memoria
 
@@ -73,7 +65,7 @@ En estos tipos de sistemas, hacen uso de las calificaciones previas de un usuari
 
 Existen dos técnicas: las **basadas en usuario** que calculan la similitud entre usuarios comparando las valoraciones sobre un mismo elemento, mientras que las **basadas en elemento** hacen predicciones haciendo uso del parecido entre los productos.
 
-La similitud (o distancia) entre usuarios o contenido puede ser calculado empleando distancias como la euclídea, Manhattan, Jaccard, entre otras muchas. Las más populares son la correlación y la similitud coseno. <!-- Referenciar el paper de recommendation systems, principles, methods and evaluation.-->
+Para calcular la similitud (o distancia) entre usuarios o contenido, se pueden emplear diversas medidas, como la euclídea, Manhattan, Jaccard, entre otras. Las más populares son la correlación y la similitud coseno. <!-- Referenciar el paper de recommendation systems, principles, methods and evaluation.-->
 
 ##### Basados en modelos
 
@@ -527,6 +519,7 @@ Este sistema solo tiene acceso a los datos de registro que son generados por un 
 
 ## 5. Conclusiones
 
+<!-- https://arxiv.org/abs/2101.06286#:~:text=Unlike%20traditional%20recommendation%20methods%2C%20including,the%20long%2Dterm%20user%20engagement. -->
 En conclusión, podemos decir que el uso del Aprendizaje por refuerzo en los sistemas de recomendación nos ofrecen características únicas que permiten brindar mejores sugerencias en comparación con los sistemas de recomendación tradicionales.
 
 Por otro lado, dentro de los sistemas de recomendación basados por refuerzo, los algoritmos tradicionales como la iteración de políticas o el Q-Learning no cumplen adecuadamente con las expectativas en el ámbito de la recomendación.
