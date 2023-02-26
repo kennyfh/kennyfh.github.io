@@ -52,7 +52,7 @@ Se hace uso de esta matriz para idenfiticar los perfiles similares en función d
 
 ![Matrix](matrix-user-element.png "Matriz de utilidad (o de puntuaciones)")
 
-En la figura anterior, se muestra una matriz en la que las columnas corresponden a los productos que se desean evaluar, mientras que las filas representan a los usuarios que han proporcionado valoraciones para estos productos. Aquellas celdas que no tienen un valor asignado denotan que el usuario aún no ha evaluado dicho producto. Por tanto, el objetivo es desarrollar un modelo que permita predecir las interacciones faltantes en la matriz.
+En la figura anterior se presenta una matriz en la que cada columna corresponde a un producto que se desea evaluar, mientras que las filas representan a los usuarios que han proporcionado valoraciones para esos productos. Aquellas celdas que no tienen un valor asignado indican que el usuario aún no ha evaluado ese producto en particular. Por lo tanto, el objetivo es desarrollar un modelo que permita predecir las interacciones faltantes en la matriz.
 
 Dentro del enfoque de filtrado colaborativo, se pueden identificar dos tipos de métodos: aquellos **basados en memoria**, que utilizan la información de valoraciones de usuarios/productos similares para realizar recomendaciones; y aquellos **basados en modelos**, que emplean técnicas de aprendizaje automático para crear un modelo que permita hacer predicciones precisas sobre las preferencias del usuario.
 
@@ -112,7 +112,7 @@ Además de las métricas, podemos evaluar el sistema por su cobertura, que se re
 
 ### 1.3 Limitaciones del aprendizaje supervisado
 
-Estos métodos tradicionales de recomendación están muy influenciados por técnicas de aprendizaje automático, y estos presentan algunas limitaciones que discutiremos a continuación.
+Estos métodos tradicionales de recomendación como los sistemas de recomendación basados en redes neuronales profundas  están muy influenciados por técnicas de aprendizaje automático, y estos presentan algunas limitaciones que discutiremos a continuación.
 
 #### Recomendación miope
 
@@ -122,7 +122,6 @@ Los sistemas de recomendación tradicionales tienen el problema de dar recomenda
 El que ocurra esto puede llevar a que un usuario acabe encerrado en una "burbuja de recomendación", en la cual un usuario se ve expuesto a un conjunto cada vez más estrecho de contenido.Y  en el peor de los casos, podría dañar la confianza de los usuarios a largo plazo.
 
 #### Sesgo del sistema
-<!-- System bias -->
 
 Otro problema que nos podemos encontrar en estos sistemas es que no tienen en cuenta factores adicionales como las preferencias del usuario o el sesgo del sistema, lo que puede resultar en recomendaciones poco precisas o irrelevantes.
 
@@ -130,7 +129,6 @@ Otro problema que nos podemos encontrar en estos sistemas es que no tienen en cu
 
 Viendo las limitaciones que tiene el usar los sistemas de recomendación tradicionales, podemos hacer uso de aprendizaje por refuerzo para darle un nuevo enfoque al recomendar contenido a los usuarios.
 
-<!-- Podríamos decir  "dinámicas del usuario para opimizar su utilidad a largo plazo -->
 El objetivo sería asegurar y descubrir las preferencias dinámicas del usuario para maximizar su satisfacción dentro de la plataforma, esto es posible con el paradigma del aprendizaje por refuerzo, debido a que es capaz de aprender contínuamente y equilibrar el mostrarle tanto contenido relevante para el usuario como presentarle contenido novedoso que le genere nuevos intereses.
 
 Aunque obviamente aplicar este paradigma no es tan sencillo, ya que nos encontraremos una serie de desafíos que vamos a tener que resolver.
@@ -246,10 +244,13 @@ DEFIENDE QUE LE HA SIDO UTIL PARA DEMOSTRAR QUE SE PUEDE USAR
   -->
 #### 2.4.2 Soft Actor-Critic (SAC)
 
-Este es un algoritmo de Aprendizaje por Refuerzo de modelo libre y off-policy desarrollado por expertos de UC Berkeley y Google donde se centra en maximizar tanto la esperanza del retorno como la esperanza de la entropía de la política
-<!-- , esto le permite explorar de manera más eficiente el espacio de acción. -->
+Este es un algoritmo de Aprendizaje por Refuerzo de modelo libre y off-policy desarrollado por expertos de UC Berkeley y Google donde se centra en maximizar tanto la esperanza del retorno como la esperanza de la entropía de la política. Esto le permite explorar de manera más eficiente el espacio de acción.
 
-Esta técnica se implementa parametrizando una política gaussiana y una función Q con una red neuronal, y optimizándolos mediante programación dinámica aproximada
+
+![Matrix](SoftActor-Critic.jpg "Soft Actor-Critic (SAC)")
+
+
+Esta técnica se implementa parametrizando una política gaussiana y una función Q con una red neuronal, y optimizándolos mediante programación dinámica aproximada.
 
 
 ### 2.4.3 REINFORCE Top-K Off-Policy Correction
@@ -265,14 +266,16 @@ Explicación del paper original: https://medium.com/@yogesh.patodia/recommender-
 PAPER: https://arxiv.org/pdf/1812.02353.pdf
  -->
 
-El *REINFORCE Top-K Off-Policy Correction* es un algoritmo basado en *REINFORCE*. Esta técnica hace uso de los datos registrados y los emplea como una política de comportamiento para generar una nueva política objetiva.
 
-Sin embargo, como los datos provienen del modelo mismo, están altamente sesgados, por lo cual, este algoritmo aprende de los datos sesgados para corregir esos sesgos.
+![Matrix](topkoffpolicy.png "REINFORCE Top-K Off-Policy Correction")
 
-También, se introduce la corrección off-policy Top-k, en la que el agente aprende a maximizar K recompensas en lugar de una sola recompensa y elegir el TOP-K. 
 
-La política aprendida con corrección TOP-K permite recomendar dos artículos de alto valor al usuario, lo que también aumenta el valor total acumulado.
 
+El algoritmo REINFORCE Top-K Off-Policy Correction se basa en el algoritmo REINFORCE y utiliza datos registrados como política de comportamiento para generar una nueva política objetiva. Sin embargo, dado que los datos son generados por el propio modelo, pueden estar altamente sesgados, por lo que este algoritmo aprende de los datos sesgados para corregir dichos sesgos.
+
+Además, se introduce la corrección off-policy Top-k, donde el agente aprende a maximizar K recompensas en lugar de una sola y elegir el TOP-K.
+
+En resumen, el algoritmo REINFORCE Top-K Off-Policy Correction utiliza la corrección de políticas y la selección de K acciones más prometedoras para mejorar la eficiencia y estabilidad del aprendizaje en un entorno de aprendizaje por refuerzo (RL).
 
 ### 2.4 Retos al aplicar aprendizaje por refuerzo en sistemas de recomendación
 
@@ -293,10 +296,11 @@ La exploración puede ser costosa en estos sistemas debido a la necesidad de pro
 Aún así es importante hacer una buena exploración, debido a que si el recomendador solo te muestra contenido aleatorio, podría generar una mala experiencia al usuario.
 
 
-<!-- 3. **Aprendizaje fuera de la política:** el aprendizaje fuera de la política o también conocido como off-policy es una técnica usada en aprendizaje por refuerzo que permite al sistema aprender de experiencias pasadas diferentes a la política actual, mejorando así su habilidad para poder adaptarse a situaciones no previstas anteriormente.
+### Aprendizaje fuera de la política
 
-      El detalle es que implementar esta técnica puede ser muy desafiante debido a la complejidad en la selección y procesamiento de los datos de entrenamiento, como complicado de ajstar  -->
+El aprendizaje fuera de la política o también conocido como off-policy es una técnica usada en aprendizaje por refuerzo que permite al sistema aprender de experiencias pasadas diferentes a la política actual, mejorando así su habilidad para poder adaptarse a situaciones no previstas anteriormente.
 
+El detalle es que implementar esta técnica puede ser muy desafiante debido a la complejidad en la selección y procesamiento de los datos de entrenamiento, como complicado de ajustar.
 
 #### Observabilidad parcial
 
@@ -504,7 +508,7 @@ Usa una técnica de muestreo para abordar el espacio de acciones muy grande y ej
 
 ### 4.5 Resolución de las limitaciones del Aprendizaje Automático
 
-En esta parte vamos a ver como han podido solucionar las dos limitaciones que tienen los sistemas de recomendación tradicionales
+En esta parte vamos a ver como han podido solucionar las dos limitaciones que tienen los sistemas de recomendación tradicionales.
 
 #### Recomendación miope
 
@@ -528,7 +532,6 @@ De igual forma, existen librerías especializadas en la creación de entornos de
 
 Además, cabe destacar de que muchas plataformas digitales como Youtube, usan aprendizaje por Refuerzo para mejorar la precisión de sus algoritmos de recomendación.
 
-
 ## 6. Referencias
 
 - F.O. Isinkaye, Y.O. Folajimi, & B.A. Ojokoh (2015). Recommendation systems: Principles, methods and evaluation. Egyptian Informatics Journal, 16(3), 261-273.
@@ -544,4 +547,4 @@ Además, cabe destacar de que muchas plataformas digitales como Youtube, usan ap
 - M Scherbina. (2019). RecNN: RL Recommendation with PyTorch.
 
 - Kai Wang, Zhene Zou, Yue Shang, Qilin Deng, Minghao Zhao, Runze Wu, Xudong Shen, Tangjie Lyu, & Changjie Fan (2021). RL4RS: A Real-World Benchmark for Reinforcement Learning based Recommender System. ArXiv, abs/2110.11073.
-- Association for Computing Machinery (ACM). (2019, March 28). “Reinforcement Learning for Recommender Systems: A Case Study on Youtube,” by Minmin Chen [Video]
+- Association for Computing Machinery (ACM). (2019, March 28). “Reinforcement Learning for Recommender Systems: A Case Study on Youtube,” by Minmin Chen [Video]()
