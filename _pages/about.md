@@ -2,24 +2,24 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
+subtitle: # <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
 
 profile:
   align: right
   image: prof_pic.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
+    <p>Kenny Jesús Flores Huamán</p>
+    <p>AI Researcher @ US</p>
+    <p>Email: kflores1@us.es</p>
 
 news: true # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+I'm Kenny, a first-year PhD student at the University of Seville under the guidance of Prof. Alejandro Escudero. My research focuses on the application of artificial intelligence in industrial settings, particularly exploring how AI can enhance production efficiency and decision-making in complex environments. I hold a Master’s degree in Logic, Computing, and Artificial Intelligence from the University of Seville, where I developed a strong foundation in AI, data science, and various programming paradigms.
 
-Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+Currently, I work as a specialist technician in the Department of Industrial Organization and Management of Companies II at the University of Seville. My role involves applying machine learning techniques to optimize Production Planning and Control within the metallurgical industry, blending academic research with practical industry challenges. I have a proven track record of implementing machine learning models using Python, leveraging tools such as Scikit-Learn, NumPy, pandas, PyTorch, and Gradio.
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+In addition to my expertise in machine learning, I have explored functional programming with Haskell, focusing on the development of parallel algorithms for GPU computing. I am passionate about the transformative power of AI in industrial applications and am constantly seeking new opportunities to drive innovation and solve complex problems.
