@@ -4,7 +4,7 @@ title: "Reinforcement Learning and Recommender Systems"
 date: 2023-01-14 21:29:01
 description: march & april, looking forward to summer
 tags: ["Markov", "Reinforce-Learning","System-Recomendation"]
-categories: sample-posts
+categories: AI
 ---
 
 
