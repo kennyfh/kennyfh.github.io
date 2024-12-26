@@ -1,0 +1,31 @@
+disabled = false
+languageCode = "en"
+languageName = "English"
+weight = 1
+title = "Kenny F."
+
+[params]
+  displayName = "EN"
+  isoCode = "en"
+  rtl = false
+  dateFormat = "2 January 2006"
+  # logo = "img/logo.png" 
+  # secondaryLogo = "img/logo.png"
+  # description = "My awesome website"
+  # copyright = "Copy, _right?_ :thinking_face:"
+
+
+[params.author]
+  name = "Kenny Flores"
+  email = "kflores1@us.es"
+  image = "img/prof_pic.jpg"
+  imageQuality = 96
+  headline = "AI Researcher @ University of Seville"
+  bio = "Artificial Intelligence Researcher @ University of Seville"
+  links = [
+    { email = "mailto:kflores1@us.es" },
+    { github = "https://github.com/kennyfh" },
+    { gitlab = "https://gitlab.com/mrkenny" },
+    { linkedin = "https://linkedin.com/in/kennyfh" },
+
+  ]
