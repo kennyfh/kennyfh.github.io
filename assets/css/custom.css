@@ -216,3 +216,21 @@ td {
         color: #e5e7eb;
     }
 }
+
+
+/* Color adaptable */
+.year-range {
+  color: var(--accent-color);
+}
+
+/* Define el color base en modo claro */
+:root {
+  --accent-color: #1E90FF; /* azul */
+}
+
+/* Sobrescribe en modo oscuro */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --accent-color: #80bfff; /* azul más claro para fondo oscuro */
+  }
+}
