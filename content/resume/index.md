@@ -159,7 +159,7 @@ Involved in applied research projects, integrating artificial intelligence solut
 
 ## Education
 
-<table>
+<!-- <table>
     <thead>
         <tr>
             <th>School</th>
@@ -186,12 +186,12 @@ Involved in applied research projects, integrating artificial intelligence solut
             <td>2018</td>
         </tr>
     </tbody>
-</table>
+</table> -->
 
 
 
 <!-- {{<timeline >}}
-{{<timelineItem icon="lucide/graduation-cap" header="University of Seville" badge="2024 - present" subheader="PhD in Mechanical and Industrial Organisation Engineering">}}
+{{<timelineItem icon="lucide/graduation-cap" header="University of Seville" badge="" subheader="PhD in Mechanical and Industrial Organisation Engineering">}}
 {{</timelineItem >}}
 {{<timelineItem icon="lucide/graduation-cap" header="University of Seville" badge="2022 - 2023" subheader="Master's Degree in Logic, Computation and AI">}}
 {{</timelineItem >}}
@@ -199,6 +199,47 @@ Involved in applied research projects, integrating artificial intelligence solut
 
 {{</timelineItem >}}
 {{</timeline >}} -->
+
+{{< timeline >}}
+
+    {{< timelineItem icon="graduation-cap" header="PhD Industrial Organisation Engineering" subheader="University of Seville" badge="april 2024 - present" >}}
+        <!-- <p>
+        Thesis on <em>Why LLMs are awesome</em>. Supervised by <strong>Prof Joe Smith</strong>. Presented papers at 5 IEEE conferences with the contributions being published in 2 Springer journals.
+        </p> -->
+        <!-- <a href="#" class="btn-thesis">Read Thesis</a> -->
+    {{< /timelineItem >}}
+
+{{< timelineItem icon="graduation-cap" header="MSc in Artificial Intelligence" subheader="University of Seville" badge="2022 - 2023" >}}
+        <strong>Final Grade (scale 0-10): 9.23</strong>
+        <p>Specialized in machine learning, NLP, and deep learning. My Master's Thesis on "Machine Learning Applications in the Metallurgical Industry" received the distinction of <strong>"Matrícula de Honor" (10/10)</strong>.</p>
+        <p><strong>Key coursework included</strong></p>
+        <ul>
+            <li>Deep Learning</li>
+            <li>Natural Language Processing</li>
+            <li>Machine Learning</li>
+            <li>Bio-inspired Computation</li>
+            <li>Computational Methods in Artificial Life</li>
+            <li>AI for Data Science</li>
+        </ul>
+    {{< /timelineItem >}}
+
+    {{< timelineItem icon="graduation-cap" header="BSc in Computer Science" subheader="University of Seville" badge="2018 – 2022" >}}
+        <strong>Final Grade (scale 0-10): 7.39</strong>
+        <p>Developed a strong foundation in core computer science principles with a growing specialization in AI and data-related technologies during my final years.</p>
+        <p><strong>Key coursework included</strong></p>
+        <ul>
+            <li>Business Intelligence</li>
+            <li>Enterprise Information Systems</li>
+            <li>Human-Computer Interaction</li>
+            <li>Declarative Programming</li>
+            <li>Digital Image Processing</li>
+            <li>Computer Architecture</li>
+            <li>Artificial Intelligence</li>
+        </ul>
+    {{< /timelineItem >}}
+
+{{< /timeline >}}
+
 
 ## Relevant Certifications
 
