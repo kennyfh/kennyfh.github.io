@@ -2,6 +2,7 @@
 title: "About"
 date: 2024-12-25T20:55:37+01:00
 draft: false
+showDate : false
 ---
 
 
