@@ -18,7 +18,7 @@ title = "Kenny F."
 [params.author]
   name = "Kenny Flores"
   email = "kflores1@us.es"
-  image = "img/prof_pic.jpg"
+  image = "img/prof_pic.png"
   imageQuality = 96
   headline = "AI Researcher @ University of Seville"
   bio = "Artificial Intelligence Researcher @ University of Seville"
