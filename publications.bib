@@ -13,7 +13,7 @@ ABSTRACT = {This study focuses on estimating the lead times of various processes
 DOI = {10.3390/math12152347}
 }
 
-@InProceedings{Flores2025,
+@InProceedings{FloresSpringer2025,
 author="Flores-Huam{\'a}n, Kenny-Jes{\'u}s
 and Mu{\~{n}}oz-D{\'i}az, Mar{\'i}a-Luisa
 and Rodr{\'i}guez-Palero, Mar{\'i}a
@@ -32,4 +32,17 @@ abstract="This study focuses on the exploration and application of machine learn
 isbn="978-3-031-82334-3"
 }
 
+
+@article{FloresCAIE2025,
+title = {Enhancing process lead time forecasting with machine learning and upstream process data: A case study in wind tower manufacturing},
+journal = {Computers & Industrial Engineering},
+pages = {111410},
+year = {2025},
+issn = {0360-8352},
+doi = {https://doi.org/10.1016/j.cie.2025.111410},
+url = {https://www.sciencedirect.com/science/article/pii/S036083522500556X},
+author = {Kenny-Jesús Flores-Huamán and Antonio Lorenzo-Espejo and María-Luisa Muñoz-Díaz and Alejandro Escudero-Santana},
+keywords = {Lead time prediction, Machine learning, Production planning and control, SHAP, Model interpretability, Wind tower manufacturing, Comparative analysis},
+abstract = {Accurate lead time prediction is critical for optimising sequential manufacturing processes, particularly in industries with high variability such as wind turbine tower production. This paper proposes a machine learning-based system to estimate lead times for two pivotal sequential operations: bending and longitudinal welding (LW). A distinctive feature of this system is its innovative integration strategy, where the predictive output from the bending model, specifically, the predicted bending lead time and its associated error, is leveraged as an input feature for the LW lead time estimation model. This approach explicitly models and enhances the representation of inter-process dependencies. While bending predictions show moderate performance, their inclusion as inputs demonstrably and significantly improves LW lead time estimation accuracy. A key contribution of this work is the comparative analysis between the ML-based LW predictions and traditional engineering methods. Our results demonstrate that the integrated ML model for LW achieves a 54% reduction in MAE (from 11.36 to 2.03 h) and a 74% lower RMSE (from 12.01 to 3.13 h) compared to engineering estimates, validating its superior accuracy. To enhance interpretability, SHAP (SHapley Additive Explanations) identifies critical factors such as sheet thickness, personnel experience, and upstream process quality, including the impact of the integrated bending predictions. The system’s low execution time enables real-time scheduling adjustments, offering a practical solution for production planning. These findings highlight the transformative potential of ML, particularly through such sequential predictive integration, in replacing outdated engineering heuristics and providing actionable insights for complex manufacturing environments.}
+}
 
