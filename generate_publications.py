@@ -103,7 +103,11 @@ for entry in sorted_entries:
     # 2. EXTRAER Y LIMPIAR METADATOS
     title = latex_converter.latex_to_text(entry.get("title", "")).replace("'", "''")
     authors_list = [latex_converter.latex_to_text(a.strip()) for a in entry.get("author", "").split(" and ")]
-    abstract_raw = latex_converter.latex_to_text(entry.get("abstract", "")).strip()
+    # abstract_raw = latex_converter.latex_to_text(entry.get("abstract", "")).strip()
+    abstract_from_bib = entry.get("abstract", "")
+    safe_abstract = abstract_from_bib.replace('%', r'\%')
+    # Ahora procesamos la cadena segura, que ya no tiene '%' problemáticos.
+    abstract_raw = latex_converter.latex_to_text(safe_abstract).strip()
     indented_abstract = textwrap.indent(text=abstract_raw, prefix='  ')
     year = entry.get("year", "")
     publication_source = latex_converter.latex_to_text(get_publication_source(entry)).replace("'", "''")
