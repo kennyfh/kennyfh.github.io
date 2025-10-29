@@ -4,21 +4,19 @@ import os
 import re
 import shutil
 import textwrap
+from pathlib import Path
 
 # --- CONFIGURACIÓN ---
 BIB_FILE = "publications.bib"
-CONTENT_DIR = "content/publications"
-SOURCE_FILES_DIR = "source_files" # Carpeta donde guardas tus PDFs originales
+CONTENT_DIR = Path("content/publications")
+SOURCE_FILES_DIR = Path("source_files")
 
 # --- LIMPIEZA INICIAL ---
 # Limpiar el directorio de contenido antiguo para evitar archivos huérfanos
-if os.path.exists(CONTENT_DIR):
-    shutil.rmtree(CONTENT_DIR)
-os.makedirs(CONTENT_DIR, exist_ok=True)
-
+CONTENT_DIR.mkdir(parents=True, exist_ok=True)
 # Asegurarse de que el directorio de archivos fuente exista
-if not os.path.exists(SOURCE_FILES_DIR):
-    os.makedirs(SOURCE_FILES_DIR)
+if not SOURCE_FILES_DIR.exists():
+    SOURCE_FILES_DIR.mkdir(parents=True, exist_ok=True)
     print(f"Directorio '{SOURCE_FILES_DIR}' no encontrado. Lo he creado por ti. "
           f"Por favor, coloca tus archivos (ej: 'tu_id.pdf') aquí.")
 
@@ -135,7 +133,20 @@ for entry in sorted_entries:
         slides_dest_filename = f"{slug}_slides.pdf"
         shutil.copy(slides_source_path, os.path.join(publication_path, slides_dest_filename))
         resources_front_matter.append(f'slides: "{slides_dest_filename}"')
-        
+
+    image_copied = False        
+    image_extensions = ['.jpg', '.jpeg', '.png']
+    for ext in image_extensions:
+        image_source_path = SOURCE_FILES_DIR / f"{entry_id}{ext}"
+        if image_source_path.exists():
+            image_dest_filename = f"featured{ext}" # Esta es una cadena (str)
+            destination_path = publication_path / Path(image_dest_filename)
+            destination_path.write_bytes(image_source_path.read_bytes())
+            resources_front_matter.append(f'image: "{image_dest_filename}"')  
+            image_copied = True
+            break
+
+
     # Añadir enlace al sitio web si existe
     if website_url:
         resources_front_matter.append(f'website: "{website_url}"')
@@ -143,7 +154,7 @@ for entry in sorted_entries:
     # 4. CONSTRUIR Y ESCRIBIR EL ARCHIVO index.md
     md_content = f"""---
 title: '{title}'
-date: {year}-01-01
+showDate: false
 authors:
 """
     for author in authors_list:
