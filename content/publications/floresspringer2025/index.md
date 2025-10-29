@@ -1,6 +1,6 @@
 ---
 title: 'Machine Learning Techniques to Predict Process Time in Operations with High Variability'
-date: 2025-01-01
+showDate: false
 authors:
   - "Flores-Huamán, Kenny-Jesús
 and Muñoz-Díaz, María-Luisa
@@ -11,6 +11,9 @@ publication_short: "" # Puedes usar esto para una versión corta del nombre de l
 abstract: |-
   This study focuses on the exploration and application of machine learning techniques to predict the process time of operations with high variability. The proposed methodology includes the identification of significant parameters, the individual prediction of every operation and the integration of individual prediction to determine the lead time of the chain. The study is conducted in wind tower manufacturing plants located in Spain and Brazil. The proposed approach overcomes the limitations of other current techniques such as direct formulation or linear programming. The results indicate that, overall, gradient boosting models, such as XGBoost or LightGBM, achieve better performance in a significant portion of the operations, although other models like NODE also demonstrate superior results in certain specific operations.
 doi: ""
+pdf: "floresspringer2025.pdf"
+image: "featured.jpeg"
+website: "https://link.springer.com/chapter/10.1007/978-3-031-82334-3_61"
 
 bibtex: |-
   @inproceedings{FloresSpringer2025,
@@ -29,6 +32,7 @@ bibtex: |-
    pages = {350--355},
    publisher = {Springer Nature Switzerland},
    title = {Machine Learning Techniques to Predict Process Time in Operations with High Variability},
+   url = {https://link.springer.com/chapter/10.1007/978-3-031-82334-3_61},
    year = {2025}
   }
 

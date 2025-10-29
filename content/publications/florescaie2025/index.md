@@ -1,6 +1,6 @@
 ---
 title: 'Enhancing process lead time forecasting with machine learning and upstream process data: A case study in wind tower manufacturing'
-date: 2025-01-01
+showDate: false
 authors:
   - "Kenny-Jesús Flores-Huamán"
   - "Antonio Lorenzo-Espejo"
@@ -20,7 +20,9 @@ abstract: |-
   solution for production planning. These findings highlight the transformative potential of ML, particularly through such sequential predictive integration, in replacing outdated engineering heuristics
   and providing actionable insights for complex manufacturing environments.
 doi: "https://doi.org/10.1016/j.cie.2025.111410"
-website: "https://www.sciencedirect.com/science/article/pii/S036083522500556X"
+pdf: "florescaie2025.pdf"
+image: "featured.jpg"
+website: "https://doi.org/10.1016/j.cie.2025.111410"
 
 bibtex: |-
   @article{FloresCAIE2025,
@@ -41,7 +43,7 @@ bibtex: |-
    keywords = {Lead time prediction, Machine learning, Production planning and control, SHAP, Model interpretability, Wind tower manufacturing, Comparative analysis},
    pages = {111410},
    title = {Enhancing process lead time forecasting with machine learning and upstream process data: A case study in wind tower manufacturing},
-   url = {https://www.sciencedirect.com/science/article/pii/S036083522500556X},
+   url = {https://doi.org/10.1016/j.cie.2025.111410},
    year = {2025}
   }
 
