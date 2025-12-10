@@ -8,9 +8,30 @@ showTableOfContents : false
 
 ## Professional Experience
 
+### <span class="year-range">[October 2025 - Present]</span> Data Engineer
+**NEXT Digital**
+- Data modeling & transformations with **SQL** and **dbt**, plus professional dashboards in **Power BI**.  
+- End-to-end data pipelines using **Airflow**, **AWS**, and scalable processing with **Spark**.  
+- DevOps fundamentals: **Git**, **Docker**, Bash scripting, and agile development with **Scrum**.  
+- Applied **Machine Learning**, **GenAI**, and real-time data ingestion via APIs and streaming.
 
-### <span class="year-range">[January 2024 - Present]</span> AI Researcher - HYBLICON Project
-**MP Ascensores (in collaboration with Org. of Industrial and Business Management II, University of Seville)**
+- **Technologies:**
+  {{< keywordList >}}
+    {{< keyword icon="code" >}} Python {{< /keyword >}}
+    {{< keyword icon="code" >}} SQL / DBT {{< /keyword >}}
+    {{< keyword icon="code" >}} Airflow {{< /keyword >}}
+    {{< keyword icon="code" >}} AWS {{< /keyword >}}
+    {{< keyword icon="code" >}} Spark {{< /keyword >}}
+    {{< keyword icon="code" >}} Docker {{< /keyword >}}
+    {{< keyword icon="code" >}} Power BI {{< /keyword >}}
+  {{< /keywordList >}}
+
+
+---
+
+
+### <span class="year-range">[January 2024 - October 2025]</span> AI Researcher - HYBLICON Project
+**MP Lifts (in collaboration with Org. of Industrial and Business Management II, University of Seville)**
 
 - Development of cloud-based AI algorithms to optimize elevator operation through learning building usage patterns.
 - Implementation of machine learning techniques for dynamic elevator behavior adjustment, enhancing user experience and reducing energy consumption.
@@ -72,133 +93,7 @@ showTableOfContents : false
 - **Models:** Traditional Machine Learning models (decision trees, ensemble learning, MLP, among others).
 - **Award:** Recipient of the [AEIPRO - IPMA Spain Project Excellence Award](https://www.aeipro.com/enoticias/158-proyectos-premiados/1472-offshorewind.html) in the Change Management/Product Development category.
 
-
-<!-- 
-
-{{<timeline>}}
-
-<span class="year-range">[2004–2006]</span> 
-
-
-
-
-
-{{<timelineItem icon="lucide/briefcase" header="Artificial Intelligence Researcher" badge="March 2023 - Present" subheader="Organization of Industrial and Business Management II, University of Seville">}}
-Involved in applied research projects, integrating artificial intelligence solutions in industrial environments and developing technologies tailored to specific contexts Contributed to scientific dissemination through article publications and conference presentations on industrial AI applications
-<br>
-
-<h3>HYBLICON Project - In collaboration with MP Ascensores (January 2024 - Present)</h3>
-
-<ul>
-    <li>Development of cloud-based AI algorithms to optimize elevator operationthrough learning building usage patterns</li>
-    <li>Implementation of machine learning techniques for dynamic elevator behavioadjustment, enhancing user experience and reducing energy consumption</li>
-    <li><strong>Technologies:</strong> 
-        {{<keywordList >}}
-        {{<keyword icon="code" >}} Python {{</keyword >}}
-        {{<keyword icon="code" >}} NumPy {{</keyword >}}
-        {{<keyword icon="code" >}} Pandas {{</keyword >}}
-        {{<keyword icon="code" >}} scikit-learn {{</keyword >}}
-        {{<keyword icon="code" >}} PyTorch {{</keyword >}}
-        {{<keyword icon="code" >}} Lightning {{</keyword >}}
-        {{<keyword icon="code" >}} Matplotlib {{</keyword >}}
-        {{<keyword icon="code" >}} Seaborn {{</keyword >}}
-        {{<keyword icon="code" >}} Optuna {{</keyword >}}
-        {{<keyword icon="code" >}} Gradio {{</keyword >}}
-        {{</keywordList >}}
-    </li>
-    <li><strong>Models:</strong> Recurrent Neural Networks (<em>RNN, LSTM, GRU</em>) XGBoost</li>
-</ul>
-
-<h3>INARI Project</strong> - In collaboration with GRI Renewable Industries and Redes (September 2023 - January 2024)</h3>
-
-<ul>
-    <li>Research and development of AI models and neural networks for cost predictioof manufacturing complex wind components</li>
-    <li>Implementation of intelligent product digital models, experimental projecflow control environments, and advanced cost simulation</li>
-    <li>Machine learning models applied to <em>lead time</em> and consumable cosprediction in Seville and Brazil factories</li>
-    <li><strong>Technologies:</strong> 
-        {{<keywordList >}}
-        {{<keyword icon="code" >}} Python {{</keyword >}}
-        {{<keyword icon="code" >}} NumPy {{</keyword >}}
-        {{<keyword icon="code" >}} Pandas {{</keyword >}}
-        {{<keyword icon="code" >}} scikit-learn {{</keyword >}}
-        {{<keyword icon="code" >}} pytorch_tabular {{</keyword >}}
-        {{<keyword icon="code" >}} Matplotlib {{</keyword >}}
-        {{<keyword icon="code" >}} Seaborn {{</keyword >}}
-        {{<keyword icon="code" >}} PyCaret {{</keyword >}}
-        {{<keyword icon="code" >}} Gradio {{</keyword >}}
-        {{</keywordList >}}
-    </li>
-    <li><strong>Models:</strong> Machine Learning models (XGBoost, Random Forestetc) and Deep Learning for tabular data (<em>TabNet, NODE</em>)</li>
-    <li><strong>Publication:</strong> Results led to the research articl<em>Lead-Time Prediction in Wind Tower Manufacturing</em></li>
-</ul>
-
-<h3>OFFSHOREWIND Project - In collaboration with GRI Renewable Industries (March - September 2023)</h3>
-
-<ul>
-    <li>Research and development of machine learning algorithms for optimal tassequencing, improving efficiency in wind tower production in the Seville factor</li>
-    <li><strong>Technologies:</strong> 
-        {{<keywordList >}}
-        {{<keyword icon="code" >}} Python {{</keyword >}}
-        {{<keyword icon="code" >}} NumPy {{</keyword >}}
-        {{<keyword icon="code" >}} Pandas {{</keyword >}}
-        {{<keyword icon="code" >}} Matplotlib {{</keyword >}}
-        {{<keyword icon="code" >}} Seaborn {{</keyword >}}
-        {{<keyword icon="code" >}} scikit-learn {{</keyword >}}
-        {{<keyword icon="code" >}} Gradio {{</keyword >}}
-        {{</keywordList >}}
-    </li>
-    <li><strong>Models:</strong> Traditional Machine Learning models (decision trees ensemble learning, MLP, among others)</li>
-    <li><strong>Award:</strong> Recipient of the <a href="https://wwwaeiprocom/enoticias/158-proyectos-premiados/1472-offshorewindhtml">AEIPRO - IPMA Spain Project Excellence Award</a> in the Change Management/Product Development category</li>
-</ul>
-
-
-
-{{</timelineItem>}}
-
-{{</timeline >}} -->
-
 ## Education
-
-<!-- <table>
-    <thead>
-        <tr>
-            <th>School</th>
-            <th>Link</th>
-            <th>Degree</th>
-            <th>Date</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td rowspan=4><img class="customEntitityLogo" src="us_logo.png"/></td>
-            <td rowspan=4><a href="https://www.us.es/" target="_blank">University of Seville </a></td>
-        </tr>
-        <tr>
-            <td>PhD in Mechanical and Industrial Organisation Engineering</td>
-            <td>2024</td>
-        </tr>
-        <tr>
-            <td>Master's Degree in Logic, Computation and AI</td>
-            <td>2022</td>
-        </tr>
-        <tr>
-            <td>Bachelor’s Degree in Computer Science</td>
-            <td>2018</td>
-        </tr>
-    </tbody>
-</table> -->
-
-
-
-<!-- {{<timeline >}}
-{{<timelineItem icon="lucide/graduation-cap" header="University of Seville" badge="" subheader="PhD in Mechanical and Industrial Organisation Engineering">}}
-{{</timelineItem >}}
-{{<timelineItem icon="lucide/graduation-cap" header="University of Seville" badge="2022 - 2023" subheader="Master's Degree in Logic, Computation and AI">}}
-{{</timelineItem >}}
-{{<timelineItem icon="lucide/graduation-cap" header="University of Seville" badge="2018 - 2022" subheader="Bachelor’s Degree in Computer Science">}}
-
-{{</timelineItem >}}
-{{</timeline >}} -->
 
 {{< timeline >}}
 
@@ -212,42 +107,37 @@ Involved in applied research projects, integrating artificial intelligence solut
 {{< timelineItem icon="graduation-cap" header="MSc in Artificial Intelligence" subheader="University of Seville" badge="2022 - 2023" >}}
         <strong>Final Grade (scale 0-10): 9.23</strong>
         <p>Specialized in machine learning, NLP, and deep learning. My Master's Thesis on "Machine Learning Applications in the Metallurgical Industry" received the distinction of <strong>"Matrícula de Honor" (10/10)</strong>.</p>
-        <p><strong>Key coursework included</strong></p>
-        <ul>
-            <li>Deep Learning</li>
-            <li>Natural Language Processing</li>
-            <li>Machine Learning</li>
-            <li>Bio-inspired Computation</li>
-            <li>Computational Methods in Artificial Life</li>
-            <li>AI for Data Science</li>
-        </ul>
+        <details>
+          <summary><strong>Key coursework included</strong></summary>
+          <ul>
+              <li>Deep Learning</li>
+              <li>Natural Language Processing</li>
+              <li>Machine Learning</li>
+              <li>Bio-inspired Computation</li>
+              <li>Computational Methods in Artificial Life</li>
+              <li>AI for Data Science</li>
+          </ul>
+        </details>
     {{< /timelineItem >}}
 
     {{< timelineItem icon="graduation-cap" header="BSc in Computer Science" subheader="University of Seville" badge="2018 – 2022" >}}
         <strong>Final Grade (scale 0-10): 7.39</strong>
         <p>Developed a strong foundation in core computer science principles with a growing specialization in AI and data-related technologies during my final years.</p>
-        <p><strong>Key coursework included</strong></p>
-        <ul>
-            <li>Business Intelligence</li>
-            <li>Enterprise Information Systems</li>
-            <li>Human-Computer Interaction</li>
-            <li>Declarative Programming</li>
-            <li>Digital Image Processing</li>
-            <li>Computer Architecture</li>
-            <li>Artificial Intelligence</li>
-        </ul>
+        <details>
+          <summary><strong>Key coursework included</strong></summary>
+          <ul>
+              <li>Business Intelligence</li>
+              <li>Enterprise Information Systems</li>
+              <li>Human-Computer Interaction</li>
+              <li>Declarative Programming</li>
+              <li>Digital Image Processing</li>
+              <li>Computer Architecture</li>
+              <li>Artificial Intelligence</li>
+          </ul>
+        </details>
     {{< /timelineItem >}}
 
 {{< /timeline >}}
-
-
-## Relevant Certifications
-
-- **Fundamentals of Accelerated Data Science** (NVIDIA)
-- **Fundamentals of Deep Learning** (NVIDIA)
-- **Microsoft Certified: Azure Fundamentals** (Microsoft)
-- **Fundamentals of Accelerated Computing with CUDA Python** (NVIDIA)
-
 
 ## Skills
 
@@ -298,3 +188,12 @@ Involved in applied research projects, integrating artificial intelligence solut
         {{</keywordList >}}
     </li>
 </ul>
+
+
+## Relevant Certifications
+
+- **Fundamentals of Accelerated Data Science** (NVIDIA)
+- **Fundamentals of Deep Learning** (NVIDIA)
+- **Microsoft Certified: Azure Fundamentals** (Microsoft)
+- **Fundamentals of Accelerated Computing with CUDA Python** (NVIDIA)
+

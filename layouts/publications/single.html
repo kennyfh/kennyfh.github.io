@@ -1,12 +1,8 @@
 {{ define "main" }}
 <div class="publication-single">
-
-  <!-- INICIO: Breadcrumb para volver a la lista -->
   <nav class="breadcrumb">
     <a href="{{ .Site.BaseURL }}publications/">‹ Back to all publications</a>
   </nav>
-
-  <!-- FIN: Breadcrumb -->
   <br>
   <br>
   <h1 class="publication-title">{{ .Title }}</h1>
@@ -14,13 +10,12 @@
   <p class="authors"><strong>Authors:</strong> {{ delimit .Params.authors ", " }}</p>
   
   <p class="publication-meta">
-    Publicado en <em>{{ .Params.publication }}</em>, {{ .Date.Format "2006" }}.
+    Published in<em>{{ .Params.publication }}</em>, {{ .Date.Format "2006" }}.
     {{ with .Params.doi }}
       <a href="https://doi.org/{{ . }}" target="_blank">DOI: {{ . }}</a>
     {{ end }}
   </p>
 
-  <!-- Botones de acción -->
   <div class="publication-buttons">
     {{ with .Params.pdf }}
       <a href="{{ . }}" class="btn" target="_blank">PDF</a>
@@ -32,18 +27,15 @@
       <a href="{{ . }}" class="btn" target="_blank">Código</a>
     {{ end }}
     {{ with .Params.website }}
-    <!-- Este es un enlace externo, así que no necesita .Page.RelPermalink -->
     <a href="{{ . }}" class="btn" target="_blank">Website</a>
     {{ end }}
     <button class="btn" onclick="toggleVisibility('bibtex-block')">Cite (BibTeX)</button>
   </div>
 
-  <!-- Contenedor del BibTeX (oculto por defecto) -->
   <div id="bibtex-block" class="bibtex-block" style="display:none;">
     <pre><code>{{ .Params.bibtex }}</code></pre>
   </div>
 
-  <!-- Abstract -->
   <div class="abstract">
     <h2>Abstract</h2>
     <p>{{ .Params.abstract | safeHTML }}</p>
@@ -51,7 +43,6 @@
 
 </div>
 
-<!-- CSS y JS reutilizados de tu script original -->
 <style>
 .publication-single { max-width: 800px; margin: auto; }
 .publication-buttons { margin: 1.5rem 0; }
