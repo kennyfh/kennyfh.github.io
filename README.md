@@ -38,7 +38,7 @@ git pull --recurse-submodules
 hugo serve
 ```
 
-**Si quieres añadir publicaciones para la sección de `publications`de la web, añadir un artículo en el fichero `publications.bib`, y ejecutar el siguiente comando (si usas uv)
+**Si quieres añadir publicaciones para la sección de `publications`de la web, añadir un artículo en el fichero `publications.bib`, y ejecutar el siguiente comando (si usas uv)**
 
 ```bash
 uv run generate_publications.py
