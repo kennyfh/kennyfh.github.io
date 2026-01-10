@@ -5,10 +5,8 @@ import re
 import shutil
 import textwrap
 from pathlib import Path
+from PIL import Image, ImageOps
 
-# BIB_FILE = "publications.bib"
-# CONTENT_DIR = Path("content/publications")
-# SOURCE_FILES_DIR = Path("source_files")
 BASE_DIR = Path(__file__).resolve().parent  # ajusta según dónde esté el script
 print("CWD:", os.getcwd())
 print("Script dir:", Path(__file__).resolve().parent)
@@ -143,11 +141,37 @@ for entry in sorted_entries:
         resources_front_matter.append(f'slides: "{slides_dest_filename}"')
 
     for ext in [".jpg", ".jpeg", ".png"]:
-        for img in SOURCE_FILES_DIR.glob(f"*{ext}"):
-            if img.stem.lower() == entry_id.lower():
-                image_dest_filename = f"featured{ext}"
+        for img_path in SOURCE_FILES_DIR.glob(f"*{ext}"):
+            if img_path.stem.lower() == entry_id.lower():
+                image_dest_filename = f"featured.png" # Forzamos PNG para transparencia
                 destination_path = publication_path / image_dest_filename
-                destination_path.write_bytes(img.read_bytes())
+                
+                with Image.open(img_path) as img:
+                    img = img.convert("RGBA")
+                    w, h = img.size
+                    
+                    # Definimos la proporción deseada (ejemplo 2:1 o 16:9)
+                    target_ratio = 1.5 
+                    current_ratio = w / h
+                    
+                    if current_ratio > target_ratio:
+                        # Imagen muy ancha: añadimos margen arriba y abajo
+                        new_w = w
+                        new_h = int(w / target_ratio)
+                    else:
+                        # Imagen muy alta: añadimos margen a los lados
+                        new_h = h
+                        new_w = int(h * target_ratio)
+                    
+                    # Creamos fondo transparente (0,0,0,0) o blanco (255,255,255,255)
+                    padding_img = Image.new("RGBA", (new_w, new_h), (255, 255, 255, 0))
+                    
+                    # Centramos la original
+                    offset = ((new_w - w) // 2, (new_h - h) // 2)
+                    padding_img.paste(img, offset, img)
+                    
+                    # Guardamos la imagen procesada
+                    padding_img.save(destination_path, "PNG")                
                 resources_front_matter.append(f'image: "{image_dest_filename}"')
                 break
         else:

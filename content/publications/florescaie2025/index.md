@@ -21,7 +21,7 @@ abstract: |-
   and providing actionable insights for complex manufacturing environments.
 doi: "https://doi.org/10.1016/j.cie.2025.111410"
 pdf: "florescaie2025.pdf"
-image: "featured.jpg"
+image: "featured.png"
 website: "https://doi.org/10.1016/j.cie.2025.111410"
 
 bibtex: |-
