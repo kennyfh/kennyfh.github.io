@@ -32,7 +32,7 @@ git pull --recurse-submodules
 
 ## Desarrollo
 
-**Para el desarrollo local y visualizar en tiempo real la web usa el siguiente comando
+Para el desarrollo local y visualizar en tiempo real la web usa el siguiente comando
 
 ```bash
 hugo serve
