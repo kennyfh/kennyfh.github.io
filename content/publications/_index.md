@@ -12,3 +12,5 @@ showWordCount: false
 showSummary: false
 sharingLinks: false
 ---
+
+During my research stay at the university, I participated in several scientific publications focused on the application of machine learning techniques to industrial and logistics problems. This section presents the works resulting from these collaborations.
