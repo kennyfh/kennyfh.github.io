@@ -26,7 +26,7 @@ I hold a **2nd DAN Black Belt** and was recognized as a **High-Performance Athle
 
 Kung Fu taught me resilience, focus, and how to stay calm under pressure, skills that are surprisingly useful when you’re trying to debug a critical server failure!
 
-![alt text](kungfu.webp)
+![Competing in a Kung Fu sword form, wearing a black uniform and purple sash](kungfu.webp)
 
 
 ## 🤝 Community & Leadership
@@ -37,8 +37,8 @@ In 2023, I co-founded the **[Algorithmics Club of the University of Seville](htt
 
 I also act as a Problem Setter and Head Judge for the **Ada Byron Programming Contest**, creating algorithmic challenges for students from six different universities. Seeing the next generation of engineers crack a tough problem is incredibly rewarding to me.
 
-![alt text](complicaus.webp)
+![Group photo of Algorithmics Club members and contestants in a university lecture hall](complicaus.webp)
 
-![alt text](club-algoritmia-entrevista.webp)
+![Interview on the Ada Byron Programming Contest livestream](club-algoritmia-entrevista.webp)
 
 I’m always up for a good chat about data, AI, or martial arts. Feel free to reach out!
