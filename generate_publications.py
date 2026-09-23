@@ -1,31 +1,98 @@
-import bibtexparser
-from pylatexenc.latex2text import LatexNodes2Text
-import os
+"""Genera las páginas de `content/publications/` a partir de `publications.bib`.
+
+Para cada entrada del .bib se crea `content/publications/<id>/index.md`. Si en
+`source_files/` hay ficheros cuyo nombre coincide con el ID de la entrada, se
+copian al bundle:
+
+- `<id>.pdf`             -> botón "PDF"
+- `<id>_slides.pdf`      -> botón "Slides"
+- `<id>.jpg|jpeg|png`    -> portada (`featured.png`, con márgenes hasta ratio 1.5)
+
+El `_index.md` de la sección solo se crea si no existe, para no perder el
+contenido que se haya añadido a mano.
+"""
+
+import filecmp
+import json
 import re
 import shutil
+import sys
 import textwrap
 from pathlib import Path
-from PIL import Image, ImageOps
 
-BASE_DIR = Path(__file__).resolve().parent  # ajusta según dónde esté el script
-print("CWD:", os.getcwd())
-print("Script dir:", Path(__file__).resolve().parent)
+import bibtexparser
+from bibtexparser.bparser import BibTexParser
+from PIL import Image, ImageChops
+from pylatexenc.latex2text import LatexNodes2Text
+
+BASE_DIR = Path(__file__).resolve().parent
 BIB_FILE = BASE_DIR / "publications.bib"
 CONTENT_DIR = BASE_DIR / "content" / "publications"
 SOURCE_FILES_DIR = BASE_DIR / "source_files"
 
-CONTENT_DIR.mkdir(parents=True, exist_ok=True)
+IMAGE_EXTENSIONS = (".jpg", ".jpeg", ".png")
+FEATURED_RATIO = 1.5
+
+MONTHS = {
+    name: i
+    for i, names in enumerate(
+        [
+            ("jan", "january", "ene", "enero"),
+            ("feb", "february", "febrero"),
+            ("mar", "march", "marzo"),
+            ("apr", "april", "abr", "abril"),
+            ("may", "mayo"),
+            ("jun", "june", "junio"),
+            ("jul", "july", "julio"),
+            ("aug", "august", "ago", "agosto"),
+            ("sep", "sept", "september", "septiembre"),
+            ("oct", "october", "octubre"),
+            ("nov", "november", "noviembre"),
+            ("dec", "december", "dic", "diciembre"),
+        ],
+        start=1,
+    )
+    for name in names
+}
+
+SECTION_INDEX = """\
+---
+title: 'Publications'
+draft: false
+showDate: false
+showDateUpdated: false
+showHeadingAnchors: false
+showPagination: false
+showReadingTime: false
+showTableOfContents: true
+showTaxonomies: false
+showWordCount: false
+showSummary: false
+sharingLinks: false
+---
+"""
+
+latex = LatexNodes2Text()
+
+
 def slugify(text):
     """Convierte un texto en un 'slug' amigable para URLs."""
-    text = text.lower()
-    text = re.sub(r"[\s\W_]+", "-", text)
-    text = text.strip("-")
-    return text
+    return re.sub(r"[\s\W_]+", "-", text.lower()).strip("-")
+
+
+def yaml_str(text):
+    """Serializa un texto como escalar YAML (las cadenas JSON son YAML válido)."""
+    return json.dumps(text, ensure_ascii=False)
+
+
+def to_text(value):
+    # Un `&` sin escapar es un separador de columnas en LaTeX y se perdería
+    value = re.sub(r"(?<!\\)&", r"\\&", value)
+    return latex.latex_to_text(value).strip()
 
 
 def get_publication_source(entry):
     """Obtiene la fuente principal de la publicación (journal, booktitle, etc.)."""
-    entry_type = entry.get("ENTRYTYPE", "").lower()
     source_fields = {
         "article": "journal",
         "inproceedings": "booktitle",
@@ -38,174 +105,132 @@ def get_publication_source(entry):
         "mastersthesis": "school",
         "misc": "howpublished",
     }
-    field = source_fields.get(entry_type)
-    source = entry.get(field, "") if field else ""
-    if not source:
-        for fallback in (
-            "journal",
-            "booktitle",
-            "publisher",
-            "school",
-            "institution",
-            "howpublished",
-            "note",
-        ):
-            source = entry.get(fallback, "")
-            if source:
-                break
-    return source
+    field = source_fields.get(entry.get("ENTRYTYPE", "").lower())
+    candidates = [field] if field else []
+    candidates += ["journal", "booktitle", "publisher", "school", "institution", "howpublished", "note"]
+    return next((entry[f] for f in candidates if entry.get(f)), "")
 
 
-print("Iniciando la generación de contenido de publicaciones...")
-latex_converter = LatexNodes2Text()
+def get_date(entry):
+    """Fecha ISO (YYYY-MM-01) a partir de year/month; sirve para ordenar la lista."""
+    year = int(entry.get("year", 0) or 0)
+    month_raw = entry.get("month", "").strip().lower().rstrip(".")
+    month = int(month_raw) if month_raw.isdigit() else MONTHS.get(month_raw, 1)
+    return f"{year:04d}-{month:02d}-01" if year else None
 
-try:
-    with open(BIB_FILE, "r", encoding="utf-8") as f:
-        bib_db = bibtexparser.load(f)
-except FileNotFoundError:
-    print(f"Error: El archivo {BIB_FILE} no fue encontrado.")
-    exit()
 
-sorted_entries = sorted(
-    bib_db.entries, key=lambda x: int(x.get("year", 0)), reverse=True
-)
+def copy_if_changed(src, dest):
+    if not dest.exists() or not filecmp.cmp(src, dest, shallow=False):
+        shutil.copy(src, dest)
 
-with open(os.path.join(CONTENT_DIR, "_index.md"), "w", encoding="utf-8") as f:
-    f.write("---\n")
-    f.write("title: 'Publications'\n")
-    f.write("draft: false\n")
-    f.write("showDate: false\n")
-    f.write("showDateUpdated: false\n")
-    f.write("showHeadingAnchors: false\n")
-    f.write("showPagination: false\n")
-    f.write("showReadingTime: false\n")
-    f.write("showTableOfContents: true\n")
-    f.write("showTaxonomies: false\n")
-    f.write("showWordCount: false\n")
-    f.write("showSummary: false\n")
-    f.write("sharingLinks: false\n")
-    f.write("---\n")
 
-# TODO: esto podría optimizarse si las cosas se separan por carpetas
-for entry in sorted_entries:
-    entry_id = entry.get("ID")
-    if not entry_id:
-        print(
-            f"Advertencia: Se omitió una entrada porque no tiene ID. Título: {entry.get('title', 'N/A')}"
-        )
-        continue
+def find_source(entry_id, suffix="", extensions=(".pdf",)):
+    """Busca en source_files/ un fichero `<entry_id><suffix>.<ext>` sin distinguir mayúsculas."""
+    wanted = f"{entry_id}{suffix}".lower()
+    for path in sorted(SOURCE_FILES_DIR.iterdir()):
+        if path.suffix.lower() in extensions and path.stem.lower() == wanted:
+            return path
+    return None
 
+
+def make_featured_image(src, dest):
+    """Añade márgenes transparentes para que todas las portadas tengan el mismo ratio."""
+    with Image.open(src) as img:
+        img = img.convert("RGBA")
+        w, h = img.size
+        if w / h > FEATURED_RATIO:
+            new_w, new_h = w, int(w / FEATURED_RATIO)
+        else:
+            new_w, new_h = int(h * FEATURED_RATIO), h
+        canvas = Image.new("RGBA", (new_w, new_h), (255, 255, 255, 0))
+        canvas.paste(img, ((new_w - w) // 2, (new_h - h) // 2), img)
+        if dest.exists():
+            with Image.open(dest) as current:
+                same = (
+                    current.size == canvas.size
+                    and not ImageChops.difference(current.convert("RGBA"), canvas).getbbox()
+                )
+            if same:
+                return  # evita reescribir el PNG (y ensuciar git) si la imagen no cambia
+        canvas.save(dest, "PNG")
+
+
+def build_publication(entry):
+    entry_id = entry["ID"]
     slug = slugify(entry_id)
-    publication_path = CONTENT_DIR / slug
-    publication_path.mkdir(parents=True, exist_ok=True)
+    bundle = CONTENT_DIR / slug
+    bundle.mkdir(parents=True, exist_ok=True)
 
-    title = latex_converter.latex_to_text(entry.get("title", "")).replace("'", "''")
-    authors_list = [
-        latex_converter.latex_to_text(a.strip())
-        for a in entry.get("author", "").split(" and ")
+    front_matter = [
+        f"title: {yaml_str(to_text(entry.get('title', '')))}",
+        "showDate: false",
     ]
-    abstract_from_bib = entry.get("abstract", "")
-    safe_abstract = abstract_from_bib.replace("%", r"\%")
-    abstract_raw = latex_converter.latex_to_text(safe_abstract).strip()
-    indented_abstract = textwrap.indent(text=abstract_raw, prefix="  ")
-    year = entry.get("year", "")
-    publication_source = latex_converter.latex_to_text(
-        get_publication_source(entry)
-    ).replace("'", "''")
-    doi = entry.get("doi", "")
-    website_url = entry.get("url", "")
+    date = get_date(entry)
+    if date:
+        front_matter.append(f"date: {date}")
+
+    authors = [to_text(a) for a in entry.get("author", "").split(" and ") if a.strip()]
+    front_matter.append("authors:")
+    front_matter += [f"  - {yaml_str(a)}" for a in authors]
+    front_matter.append(f"publication: {yaml_str(to_text(get_publication_source(entry)))}")
+
+    # En BibTeX un `%` sin escapar abre un comentario; los ya escapados (`\%`) se dejan igual
+    abstract = to_text(re.sub(r"(?<!\\)%", r"\\%", entry.get("abstract", "")))
+    if abstract:
+        front_matter.append("abstract: |-")
+        front_matter.append(textwrap.indent(abstract, "  "))
+
+    if entry.get("doi"):
+        front_matter.append(f"doi: {yaml_str(entry['doi'])}")
+
+    pdf = find_source(entry_id)
+    if pdf:
+        copy_if_changed(pdf, bundle / f"{slug}.pdf")
+        front_matter.append(f'pdf: "{slug}.pdf"')
+
+    slides = find_source(entry_id, suffix="_slides")
+    if slides:
+        copy_if_changed(slides, bundle / f"{slug}_slides.pdf")
+        front_matter.append(f'slides: "{slug}_slides.pdf"')
+
+    image = find_source(entry_id, extensions=IMAGE_EXTENSIONS)
+    if image:
+        make_featured_image(image, bundle / "featured.png")
+
+    if entry.get("url"):
+        front_matter.append(f"website: {yaml_str(entry['url'])}")
 
     db = bibtexparser.bibdatabase.BibDatabase()
     db.entries = [entry]
-    bibtex_str = bibtexparser.dumps(db)
-    resources_front_matter = []
+    front_matter.append("bibtex: |-")
+    front_matter.append(textwrap.indent(bibtexparser.dumps(db).strip(), "  "))
 
-    pdf_source_path = None
-    for pdf in SOURCE_FILES_DIR.glob("*.pdf"):
-        if pdf.stem.lower() == entry_id.lower():
-            pdf_source_path = pdf
-            break
-    
-    if pdf_source_path:
-        pdf_dest_filename = f"{slug}.pdf"
-        shutil.copy(pdf_source_path, publication_path / pdf_dest_filename)
-        resources_front_matter.append(f'pdf: "{pdf_dest_filename}"')
+    (bundle / "index.md").write_text("---\n" + "\n".join(front_matter) + "\n---\n", encoding="utf-8")
 
-    slides_source_path = SOURCE_FILES_DIR / f"{entry_id}_slides.pdf"
-    if slides_source_path.exists():
-        slides_dest_filename = f"{slug}_slides.pdf"
-        shutil.copy(
-            slides_source_path,
-            publication_path / slides_dest_filename,
-        )
-        resources_front_matter.append(f'slides: "{slides_dest_filename}"')
 
-    for ext in [".jpg", ".jpeg", ".png"]:
-        for img_path in SOURCE_FILES_DIR.glob(f"*{ext}"):
-            if img_path.stem.lower() == entry_id.lower():
-                image_dest_filename = f"featured.png" # Forzamos PNG para transparencia
-                destination_path = publication_path / image_dest_filename
-                
-                with Image.open(img_path) as img:
-                    img = img.convert("RGBA")
-                    w, h = img.size
-                    
-                    # Definimos la proporción deseada (ejemplo 2:1 o 16:9)
-                    target_ratio = 1.5 
-                    current_ratio = w / h
-                    
-                    if current_ratio > target_ratio:
-                        # Imagen muy ancha: añadimos margen arriba y abajo
-                        new_w = w
-                        new_h = int(w / target_ratio)
-                    else:
-                        # Imagen muy alta: añadimos margen a los lados
-                        new_h = h
-                        new_w = int(h * target_ratio)
-                    
-                    # Creamos fondo transparente (0,0,0,0) o blanco (255,255,255,255)
-                    padding_img = Image.new("RGBA", (new_w, new_h), (255, 255, 255, 0))
-                    
-                    # Centramos la original
-                    offset = ((new_w - w) // 2, (new_h - h) // 2)
-                    padding_img.paste(img, offset, img)
-                    
-                    # Guardamos la imagen procesada
-                    padding_img.save(destination_path, "PNG")                
-                resources_front_matter.append(f'image: "{image_dest_filename}"')
-                break
-        else:
+def main():
+    if not BIB_FILE.exists():
+        sys.exit(f"Error: no se encontró {BIB_FILE}")
+
+    parser = BibTexParser(common_strings=True)  # entiende macros como `month = dec`
+    with BIB_FILE.open(encoding="utf-8") as f:
+        entries = bibtexparser.load(f, parser=parser).entries
+
+    CONTENT_DIR.mkdir(parents=True, exist_ok=True)
+    section_index = CONTENT_DIR / "_index.md"
+    if not section_index.exists():
+        section_index.write_text(SECTION_INDEX, encoding="utf-8")
+
+    generated = 0
+    for entry in entries:
+        if not entry.get("ID"):
+            print(f"Aviso: entrada sin ID omitida ({entry.get('title', 'sin título')})")
             continue
-        break
-    if website_url:
-        resources_front_matter.append(f'website: "{website_url}"')
+        build_publication(entry)
+        generated += 1
 
-    md_content = f"""---
-title: '{title}'
-showDate: false
-authors:
-"""
-    for author in authors_list:
-        md_content += f'  - "{author}"\n'
+    print(f"Generadas {generated} publicaciones en {CONTENT_DIR.relative_to(BASE_DIR)}/")
 
-    md_content += f"""publication: '{publication_source}'
-publication_short: "" # Puedes usar esto para una versión corta del nombre de la conferencia
-abstract: |-
-{indented_abstract}
-doi: "{doi}"
-"""
-    if resources_front_matter:
-        md_content += "\n".join(resources_front_matter) + "\n"
 
-    md_content += f"""
-bibtex: |-
-{textwrap.indent(text=bibtex_str, prefix="  ")}
----
-"""
-
-    with open(os.path.join(publication_path, "index.md"), "w", encoding="utf-8") as f:
-        f.write(md_content)
-
-print(
-    f"\n¡Proceso completado! Se generaron {len(sorted_entries)} archivos de publicación en '{CONTENT_DIR}'."
-)
+if __name__ == "__main__":
+    main()

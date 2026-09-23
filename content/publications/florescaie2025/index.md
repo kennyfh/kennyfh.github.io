@@ -1,13 +1,13 @@
 ---
-title: 'Enhancing process lead time forecasting with machine learning and upstream process data: A case study in wind tower manufacturing'
+title: "Enhancing process lead time forecasting with machine learning and upstream process data: A case study in wind tower manufacturing"
 showDate: false
+date: 2025-01-01
 authors:
   - "Kenny-Jesús Flores-Huamán"
   - "Antonio Lorenzo-Espejo"
   - "María-Luisa Muñoz-Díaz"
   - "Alejandro Escudero-Santana"
-publication: 'Computers     Industrial Engineering'
-publication_short: "" # Puedes usar esto para una versión corta del nombre de la conferencia
+publication: "Computers & Industrial Engineering"
 abstract: |-
   Accurate lead time prediction is critical for optimising sequential manufacturing processes, particularly in industries with high variability such as wind turbine tower production.
   This paper proposes a machine learning-based system to estimate lead times for two pivotal sequential operations: bending and longitudinal welding (LW). A distinctive feature of this system
@@ -21,9 +21,7 @@ abstract: |-
   and providing actionable insights for complex manufacturing environments.
 doi: "https://doi.org/10.1016/j.cie.2025.111410"
 pdf: "florescaie2025.pdf"
-image: "featured.png"
 website: "https://doi.org/10.1016/j.cie.2025.111410"
-
 bibtex: |-
   @article{FloresCAIE2025,
    abstract = {Accurate lead time prediction is critical for optimising sequential manufacturing processes, particularly in industries with high variability such as wind turbine tower production.
@@ -46,5 +44,4 @@ bibtex: |-
    url = {https://doi.org/10.1016/j.cie.2025.111410},
    year = {2025}
   }
-
 ---

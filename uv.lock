@@ -20,6 +20,10 @@ dependencies = [
     { name = "pillow" },
     { name = "pylatexenc" },
     { name = "pyparsing" },
+]
+
+[package.dev-dependencies]
+dev = [
     { name = "ruff" },
 ]
 
@@ -29,8 +33,10 @@ requires-dist = [
     { name = "pillow", specifier = ">=12.1.0" },
     { name = "pylatexenc", specifier = "==2.10" },
     { name = "pyparsing", specifier = "==3.2.3" },
-    { name = "ruff", specifier = ">=0.14.10" },
 ]
+
+[package.metadata.requires-dev]
+dev = [{ name = "ruff", specifier = ">=0.14.10" }]
 
 [[package]]
 name = "pillow"

@@ -1,7 +1,7 @@
 [project]
 name = "generate-publications"
 version = "0.1.0"
-description = "Add your description here"
+description = "Genera las páginas de publicaciones de la web a partir de publications.bib"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -9,5 +9,12 @@ dependencies = [
     "pillow>=12.1.0",
     "pylatexenc==2.10",
     "pyparsing==3.2.3",
+]
+
+[dependency-groups]
+dev = [
     "ruff>=0.14.10",
 ]
+
+[tool.ruff]
+line-length = 110
