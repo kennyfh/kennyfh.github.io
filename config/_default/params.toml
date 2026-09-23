@@ -3,6 +3,7 @@
 # https://blowfish.page/docs/configuration/#theme-parameters
 
 defaultAppearance = "dark"
+defaultSocialImage = "img/social.jpg" # vista previa al compartir (1200x630)
 highlightCurrentMenuArea = true
 smartTOC = true
 smartTOCHideUnfocusedChildren = false

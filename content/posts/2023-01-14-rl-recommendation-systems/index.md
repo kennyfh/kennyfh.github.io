@@ -470,4 +470,4 @@ Additionally, it is noteworthy that many digital platforms like YouTube use rein
 - M Scherbina. (2019). RecNN: RL Recommendation with PyTorch.
 
 - Kai Wang, Zhene Zou, Yue Shang, Qilin Deng, Minghao Zhao, Runze Wu, Xudong Shen, Tangjie Lyu, & Changjie Fan (2021). RL4RS: A Real-World Benchmark for Reinforcement Learning based Recommender System. ArXiv, abs/2110.11073.
-- Association for Computing Machinery (ACM). (2019, March 28). “Reinforcement Learning for Recommender Systems: A Case Study on Youtube,” by Minmin Chen [Video].
+- Association for Computing Machinery (ACM). (2019, March 28). “Reinforcement Learning for Recommender Systems: A Case Study on Youtube,” by Minmin Chen [[Video]](https://www.youtube.com/watch?v=HEqQ2_1XRTs).
