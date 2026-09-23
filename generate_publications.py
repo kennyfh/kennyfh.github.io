@@ -94,6 +94,18 @@ def to_text(value):
     return latex.latex_to_text(value).strip()
 
 
+def short_description(abstract, limit=160):
+    """Primeras frases del resumen que quepan en `limit` caracteres (meta description)."""
+    text = " ".join(abstract.split())
+    description = ""
+    for sentence in re.split(r"(?<=[.!?])\s+", text):
+        candidate = f"{description} {sentence}".strip()
+        if len(candidate) > limit:
+            break
+        description = candidate
+    return description or text[: limit - 1].rsplit(" ", 1)[0] + "…"
+
+
 def get_publication_source(entry):
     """Obtiene la fuente principal de la publicación (journal, booktitle, etc.)."""
     source_fields = {
@@ -173,10 +185,16 @@ def build_publication(entry):
     front_matter.append("authors:")
     front_matter += [f"  - {yaml_str(a)}" for a in authors]
     front_matter.append(f"publication: {yaml_str(to_text(get_publication_source(entry)))}")
+    # Tipo y datos bibliográficos: se usan en las etiquetas citation_* para Google Scholar
+    front_matter.append(f"publication_type: {yaml_str(entry.get('ENTRYTYPE', '').lower())}")
+    for field in ("volume", "number", "pages", "publisher"):
+        if entry.get(field):
+            front_matter.append(f"{field}: {yaml_str(to_text(entry[field]))}")
 
     # En BibTeX un `%` sin escapar abre un comentario; los ya escapados (`\%`) se dejan igual
     abstract = to_text(re.sub(r"(?<!\\)%", r"\\%", entry.get("abstract", "")))
     if abstract:
+        front_matter.append(f"description: {yaml_str(short_description(abstract))}")
         front_matter.append("abstract: |-")
         front_matter.append(textwrap.indent(abstract, "  "))
 

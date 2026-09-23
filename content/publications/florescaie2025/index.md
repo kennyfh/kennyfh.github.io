@@ -8,6 +8,9 @@ authors:
   - "María-Luisa Muñoz-Díaz"
   - "Alejandro Escudero-Santana"
 publication: "Computers & Industrial Engineering"
+publication_type: "article"
+pages: "111410"
+description: "Accurate lead time prediction is critical for optimising sequential manufacturing processes, particularly in industries with high variability such as wind…"
 abstract: |-
   Accurate lead time prediction is critical for optimising sequential manufacturing processes, particularly in industries with high variability such as wind turbine tower production.
   This paper proposes a machine learning-based system to estimate lead times for two pivotal sequential operations: bending and longitudinal welding (LW). A distinctive feature of this system

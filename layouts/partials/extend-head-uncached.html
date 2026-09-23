@@ -1,0 +1,30 @@
+{{/* Etiquetas citation_* para que Google Scholar indexe cada publicación y su PDF.
+   https://scholar.google.com/intl/en/scholar/inclusion.html#indexing */}}
+{{ if and .IsPage (eq .Section "publications") }}
+  <meta name="citation_title" content="{{ .Title }}">
+  {{ range .Params.authors }}
+    <meta name="citation_author" content="{{ . }}">
+  {{ end }}
+  {{ if not .Date.IsZero }}
+    <meta name="citation_publication_date" content="{{ .Date.Format "2006/01/02" }}">
+  {{ end }}
+  {{ with .Params.publication }}
+    {{ if eq $.Params.publication_type "article" }}
+      <meta name="citation_journal_title" content="{{ . }}">
+    {{ else }}
+      <meta name="citation_conference_title" content="{{ . }}">
+    {{ end }}
+  {{ end }}
+  {{ with .Params.volume }}<meta name="citation_volume" content="{{ . }}">{{ end }}
+  {{ with .Params.number }}<meta name="citation_issue" content="{{ . }}">{{ end }}
+  {{ with .Params.pages }}
+    {{ $pages := split (replaceRE "[–—-]+" "-" .) "-" }}
+    <meta name="citation_firstpage" content="{{ index $pages 0 }}">
+    {{ if gt (len $pages) 1 }}<meta name="citation_lastpage" content="{{ index $pages 1 }}">{{ end }}
+  {{ end }}
+  {{ with .Params.publisher }}<meta name="citation_publisher" content="{{ . }}">{{ end }}
+  {{ with .Params.doi }}<meta name="citation_doi" content="{{ . }}">{{ end }}
+  {{ with .Params.pdf }}
+    {{ with $.Resources.Get . }}<meta name="citation_pdf_url" content="{{ .Permalink }}">{{ end }}
+  {{ end }}
+{{ end }}
