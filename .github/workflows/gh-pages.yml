@@ -53,3 +53,5 @@ jobs:
           publish_branch: gh-pages
           publish_dir: ./public
           cname: kennyfh.eu
+          # gh-pages solo guarda el último despliegue, no una copia por cada push
+          force_orphan: true
