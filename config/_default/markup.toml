@@ -1,5 +1,4 @@
-# -- Markup --
-# These settings are required for the theme to function.
+# Markdown y resaltado de código (requerido por Blowfish).
 
 [goldmark]
 [goldmark.renderer]

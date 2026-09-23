@@ -1,4 +1,3 @@
-disabled = false
 locale = "en"
 label = "English"
 weight = 1
@@ -10,8 +9,6 @@ title = "Kenny F."
   rtl = false
   dateFormat = "2 January 2006"
   description = "Kenny Flores: Data Engineer and Applied AI Researcher (PhD candidate, University of Seville). Publications, projects and resume."
-  # copyright = "Copy, _right?_ :thinking_face:"
-
 
 [params.author]
   name = "Kenny Flores"
@@ -25,5 +22,4 @@ title = "Kenny F."
     { github = "https://github.com/kennyfh" },
     { gitlab = "https://gitlab.com/mrkenny" },
     { linkedin = "https://linkedin.com/in/kennyfh" },
-    
   ]
