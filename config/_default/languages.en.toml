@@ -1,6 +1,6 @@
 disabled = false
-languageCode = "en"
-languageName = "English"
+locale = "en"
+label = "English"
 weight = 1
 title = "Kenny F."
 
@@ -11,7 +11,7 @@ title = "Kenny F."
   dateFormat = "2 January 2006"
   # logo = "img/logo.png" 
   # secondaryLogo = "img/logo.png"
-  # description = "My awesome website"
+  description = "Kenny Flores: Data Engineer and Applied AI Researcher (PhD candidate, University of Seville). Publications, projects and resume."
   # copyright = "Copy, _right?_ :thinking_face:"
 
 

@@ -19,7 +19,4 @@ Here are some projects I’ve worked on.
 
 Interested in collaborating or learning more about a project? Feel free to reach out or explore my repositories.
 
-{{</ alert >}}
-
-
-</BR>
+{{< /alert >}}

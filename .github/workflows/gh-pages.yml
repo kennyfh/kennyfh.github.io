@@ -1,4 +1,3 @@
-# .github/workflows/gh-pages.yml
 # https://blowfish.page/docs/hosting-deployment/#github-pages
 
 name: GitHub Pages
@@ -7,12 +6,19 @@ on:
   push:
     branches:
       - main
+  # En las PR solo se compila, para detectar errores antes de fusionar
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -23,17 +29,18 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
+          # Última versión soportada por Blowfish (themes/blowfish/release-versions/hugo-latest.txt)
           hugo-version: '0.160.1'
           extended: true
-
 
       - name: Build
         run: hugo --minify
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: peaceiris/actions-gh-pages@v4
+        if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./public
+          cname: kennyfh.eu

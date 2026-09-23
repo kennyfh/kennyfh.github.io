@@ -1,7 +1,7 @@
 ---
 title: "Reinforcement Learning and Recommender Systems"
 date: 2023-01-14 21:29:01
-description: march & april, looking forward to summer
+description: "How reinforcement learning can improve recommender systems: DQN variants, off-policy top-K and current trends."
 tags: ["Markov", "Reinforce-Learning","System-Recomendation"]
 draft: false
 ---

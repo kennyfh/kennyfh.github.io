@@ -1,6 +1,6 @@
 ---
-title: "custom frontpage"
-description: "This is a demo of adding content to the homepage."
+title: "Kenny Flores"
+description: "Data Engineer and Applied AI Researcher. Publications, projects and resume."
 ---
 
 {{< typeit 
