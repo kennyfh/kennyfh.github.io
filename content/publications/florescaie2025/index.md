@@ -19,7 +19,7 @@ abstract: |-
   experience, and upstream process quality, including the impact of the integrated bending predictions. The system’s low execution time enables real-time scheduling adjustments, offering a practical
   solution for production planning. These findings highlight the transformative potential of ML, particularly through such sequential predictive integration, in replacing outdated engineering heuristics
   and providing actionable insights for complex manufacturing environments.
-doi: "https://doi.org/10.1016/j.cie.2025.111410"
+doi: "10.1016/j.cie.2025.111410"
 pdf: "florescaie2025.pdf"
 website: "https://doi.org/10.1016/j.cie.2025.111410"
 bibtex: |-

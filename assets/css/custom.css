@@ -17,81 +17,36 @@ html.dark .year-range {
   color: rgb(var(--color-primary-300));
 }
 
-/* Página de una publicación (layouts/publications/single.html) */
+/* Página de una publicación (layouts/publications/single.html).
+ * Título, texto y botones usan clases del tema; aquí solo va la disposición. */
 .publication-single {
-  max-width: 800px;
+  max-width: 65ch;
   margin: 0 auto;
 }
 
 .publication-back {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   font-size: 0.9rem;
-}
-
-.publication-title {
-  font-size: 1.875rem;
-  font-weight: 800;
-  line-height: 1.25;
-  margin-bottom: 1rem;
-}
-
-.publication-authors {
-  margin-bottom: 0.5rem;
-}
-
-.publication-meta {
-  color: rgb(var(--color-neutral-500));
-}
-
-html.dark .publication-meta {
-  color: rgb(var(--color-neutral-400));
 }
 
 .publication-buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 1.5rem 0 0.5rem;
-}
-
-.publication-single .btn {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  border-radius: 0.375rem;
-  font-weight: 500;
-  text-decoration: none;
-  color: #fff;
-  background-color: rgb(var(--color-primary-700));
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.publication-single .btn:hover {
-  background-color: rgb(var(--color-primary-600));
-}
-
-html.dark .publication-single .btn {
-  background-color: rgb(var(--color-primary-600));
-}
-
-html.dark .publication-single .btn:hover {
-  background-color: rgb(var(--color-primary-500));
+  gap: 0.75rem;
+  margin: 1.5rem 0;
 }
 
 .publication-bibtex summary {
-  list-style: none;
+  cursor: pointer;
+  font-weight: 600;
+  color: rgb(var(--color-primary-600));
 }
 
-.publication-bibtex summary::-webkit-details-marker {
-  display: none;
+html.dark .publication-bibtex summary {
+  color: rgb(var(--color-primary-400));
 }
 
 .publication-bibtex pre {
-  margin-top: 1rem;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
-}
-
-.publication-abstract {
-  margin-top: 2rem;
 }

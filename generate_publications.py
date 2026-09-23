@@ -180,8 +180,10 @@ def build_publication(entry):
         front_matter.append("abstract: |-")
         front_matter.append(textwrap.indent(abstract, "  "))
 
-    if entry.get("doi"):
-        front_matter.append(f"doi: {yaml_str(entry['doi'])}")
+    # Solo el identificador: algunos .bib traen la URL completa (https://doi.org/...)
+    doi = re.sub(r"^(https?://(dx\.)?doi\.org/|doi:)", "", entry.get("doi", "").strip(), flags=re.I)
+    if doi:
+        front_matter.append(f"doi: {yaml_str(doi)}")
 
     pdf = find_source(entry_id)
     if pdf:

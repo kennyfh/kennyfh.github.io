@@ -1,50 +1,53 @@
 {{ define "main" }}
+{{/* Misma estructura y clases que los artículos de Blowfish para heredar su estilo */}}
 <article class="publication-single">
-  <nav class="publication-back">
-    <a href="{{ .Parent.RelPermalink }}">‹ Back to all publications</a>
-  </nav>
+  <header class="mt-5 max-w-prose">
+    <nav class="publication-back">
+      <a href="{{ .Parent.RelPermalink }}">‹ Back to all publications</a>
+    </nav>
 
-  <h1 class="publication-title">{{ .Title }}</h1>
+    <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">{{ .Title }}</h1>
 
-  {{ with .Params.authors }}
-    <p class="publication-authors"><strong>Authors:</strong> {{ delimit . ", " }}</p>
-  {{ end }}
+    <div class="mt-3 mb-6 text-base text-neutral-500 dark:text-neutral-400">
+      {{ with .Params.publication }}<em>{{ . }}</em>{{ end }}
+      {{- if not .Date.IsZero }} · {{ .Date.Year }}{{ end }}
+      {{- with .Params.doi }} · <a href="https://doi.org/{{ . }}" target="_blank" rel="noopener">doi:{{ . }}</a>{{ end }}
+    </div>
+  </header>
 
-  <p class="publication-meta">
-    {{ with .Params.publication }}Published in <em>{{ . }}</em>{{ end }}
-    {{- if not .Date.IsZero }}, {{ .Date.Year }}{{ end }}.
-    {{ with .Params.doi }}
-      <a href="https://doi.org/{{ . }}" target="_blank" rel="noopener">DOI: {{ . }}</a>
+  <section class="prose dark:prose-invert max-w-prose">
+    {{ with .Params.authors }}
+      <p class="publication-authors"><strong>Authors:</strong> {{ delimit . ", " }}</p>
     {{ end }}
-  </p>
 
-  <div class="publication-buttons">
-    {{ with .Params.pdf }}
-      <a href="{{ with $.Resources.Get . }}{{ .RelPermalink }}{{ else }}{{ . }}{{ end }}" class="btn" target="_blank" rel="noopener">PDF</a>
-    {{ end }}
-    {{ with .Params.slides }}
-      <a href="{{ with $.Resources.Get . }}{{ .RelPermalink }}{{ else }}{{ . }}{{ end }}" class="btn" target="_blank" rel="noopener">Slides</a>
-    {{ end }}
-    {{ with .Params.code }}
-      <a href="{{ . }}" class="btn" target="_blank" rel="noopener">Code</a>
-    {{ end }}
-    {{ with .Params.website }}
-      <a href="{{ . }}" class="btn" target="_blank" rel="noopener">Website</a>
-    {{ end }}
-  </div>
+    <div class="not-prose publication-buttons">
+      {{ with .Params.pdf }}
+        {{ $url := . }}{{ with $.Resources.Get . }}{{ $url = .RelPermalink }}{{ end }}
+        {{ partial "cta-button.html" (dict "url" $url "label" "PDF") }}
+      {{ end }}
+      {{ with .Params.slides }}
+        {{ $url := . }}{{ with $.Resources.Get . }}{{ $url = .RelPermalink }}{{ end }}
+        {{ partial "cta-button.html" (dict "url" $url "label" "Slides" "style" "outline") }}
+      {{ end }}
+      {{ with .Params.code }}
+        {{ partial "cta-button.html" (dict "url" . "label" "Code" "style" "outline") }}
+      {{ end }}
+      {{ with .Params.website }}
+        {{ partial "cta-button.html" (dict "url" . "label" "Website" "style" "outline") }}
+      {{ end }}
+    </div>
 
-  {{ with .Params.bibtex }}
-    <details class="publication-bibtex">
-      <summary class="btn">Cite (BibTeX)</summary>
-      <pre><code>{{ . }}</code></pre>
-    </details>
-  {{ end }}
+    {{ with .Params.bibtex }}
+      <details class="publication-bibtex">
+        <summary>Cite (BibTeX)</summary>
+        <pre><code>{{ . }}</code></pre>
+      </details>
+    {{ end }}
 
-  {{ with .Params.abstract }}
-    <section class="publication-abstract">
+    {{ with .Params.abstract }}
       <h2>Abstract</h2>
       <p>{{ . }}</p>
-    </section>
-  {{ end }}
+    {{ end }}
+  </section>
 </article>
 {{ end }}
