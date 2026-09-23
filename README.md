@@ -26,7 +26,7 @@ Antes de subir la nueva versión del tema, comprueba que la versión de Hugo de 
 
 ## Dependencias
 
-- **Hugo extended >= 0.158.0** (la CI usa 0.160.1). En macOS: `brew install hugo`. Para otros sistemas, consulta la [guía de instalación](https://gohugo.io/installation/).
+- **Hugo extended >= 0.158.0** (la CI usa 0.165.0). En macOS: `brew install hugo`. Para otros sistemas, consulta la [guía de instalación](https://gohugo.io/installation/).
 - **(Opcional) Python >= 3.12**, solo para generar las publicaciones a partir del `.bib`. Se recomienda [uv](https://docs.astral.sh/uv/getting-started/installation/#standalone-installer); también puedes usar `pip install -r requirements.txt`.
 
 ## Desarrollo
