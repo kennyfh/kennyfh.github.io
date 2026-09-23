@@ -8,11 +8,12 @@ smartTOC = true
 smartTOCHideUnfocusedChildren = false
 
 [header]
-  layout = "fixed"
+  layout = "floating" # barra flotante con efecto cristal (Blowfish v3)
 
 [homepage]
-  layout = "background"
+  layout = "landing" # portada tipo landing; el contenido está en content/_index.md
   homepageImage = "background.webp"
+  featureImageHover = true
 
 [article]
   showTableOfContents = true
