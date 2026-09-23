@@ -9,8 +9,6 @@ title = "Kenny F."
   isoCode = "en"
   rtl = false
   dateFormat = "2 January 2006"
-  # logo = "img/logo.png" 
-  # secondaryLogo = "img/logo.png"
   description = "Kenny Flores: Data Engineer and Applied AI Researcher (PhD candidate, University of Seville). Publications, projects and resume."
   # copyright = "Copy, _right?_ :thinking_face:"
 
@@ -18,7 +16,7 @@ title = "Kenny F."
 [params.author]
   name = "Kenny Flores"
   email = "kflores1@us.es"
-  image = "img/prof_pic.png"
+  image = "img/prof_pic.webp"
   imageQuality = 96
   headline = "Data Engineer @ NEXT DIGITAL"
   bio = "Data Engineer @ NEXT DIGITAL"

@@ -54,7 +54,7 @@ hugo server
 2. (Opcional) Deja en `source_files/` los ficheros con el mismo nombre que el ID de la entrada (no distingue mayúsculas):
    - `<id>.pdf`: el artículo (botón "PDF").
    - `<id>_slides.pdf`: las diapositivas (botón "Slides").
-   - `<id>.png`, `.jpg` o `.jpeg`: la portada. Se le añaden márgenes transparentes para que todas tengan la misma proporción.
+   - `<id>.webp`, `.png` o `.jpg`: la portada. Se reduce a 1600 px, se le añaden márgenes transparentes para que todas tengan la misma proporción y se guarda como `featured.webp`.
 3. Ejecuta el generador:
 
    ```bash
@@ -62,6 +62,17 @@ hugo server
    ```
 
 El script crea o actualiza `content/publications/<id>/index.md` y solo reescribe los PDFs y las portadas si han cambiado. El texto de `content/publications/_index.md` (la página de la lista) se edita a mano y el script no lo toca.
+
+## Imágenes y PDFs
+
+Para que la web cargue rápido:
+
+- Usa **WebP** para las imágenes, con un máximo de unos 1920 px de lado (2560 px para el fondo de la portada). Hugo genera las variantes más pequeñas, pero el original también se publica para el zoom.
+- Comprime los PDFs grandes antes de añadirlos, por ejemplo con Ghostscript:
+
+  ```bash
+  gs -q -dNOPAUSE -dBATCH -dSAFER -sDEVICE=pdfwrite -dPDFSETTINGS=/printer -sOutputFile=salida.pdf entrada.pdf
+  ```
 
 ## Agradecimientos
 

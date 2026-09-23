@@ -6,13 +6,14 @@ copian al bundle:
 
 - `<id>.pdf`             -> botón "PDF"
 - `<id>_slides.pdf`      -> botón "Slides"
-- `<id>.jpg|jpeg|png`    -> portada (`featured.png`, con márgenes hasta ratio 1.5)
+- `<id>.webp|png|jpg`   -> portada (`featured.webp`, con márgenes hasta ratio 1.5)
 
 El `_index.md` de la sección solo se crea si no existe, para no perder el
 contenido que se haya añadido a mano.
 """
 
 import filecmp
+import io
 import json
 import re
 import shutil
@@ -22,7 +23,7 @@ from pathlib import Path
 
 import bibtexparser
 from bibtexparser.bparser import BibTexParser
-from PIL import Image, ImageChops
+from PIL import Image
 from pylatexenc.latex2text import LatexNodes2Text
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -30,8 +31,10 @@ BIB_FILE = BASE_DIR / "publications.bib"
 CONTENT_DIR = BASE_DIR / "content" / "publications"
 SOURCE_FILES_DIR = BASE_DIR / "source_files"
 
-IMAGE_EXTENSIONS = (".jpg", ".jpeg", ".png")
+IMAGE_EXTENSIONS = (".webp", ".png", ".jpg", ".jpeg")
 FEATURED_RATIO = 1.5
+FEATURED_MAX_WIDTH = 1600  # Blowfish sirve como mucho 1280 px en las tarjetas
+FEATURED_NAME = "featured.webp"
 
 MONTHS = {
     name: i
@@ -137,6 +140,7 @@ def make_featured_image(src, dest):
     """Añade márgenes transparentes para que todas las portadas tengan el mismo ratio."""
     with Image.open(src) as img:
         img = img.convert("RGBA")
+        img.thumbnail((FEATURED_MAX_WIDTH, FEATURED_MAX_WIDTH), Image.LANCZOS)
         w, h = img.size
         if w / h > FEATURED_RATIO:
             new_w, new_h = w, int(w / FEATURED_RATIO)
@@ -144,15 +148,11 @@ def make_featured_image(src, dest):
             new_w, new_h = int(h * FEATURED_RATIO), h
         canvas = Image.new("RGBA", (new_w, new_h), (255, 255, 255, 0))
         canvas.paste(img, ((new_w - w) // 2, (new_h - h) // 2), img)
-        if dest.exists():
-            with Image.open(dest) as current:
-                same = (
-                    current.size == canvas.size
-                    and not ImageChops.difference(current.convert("RGBA"), canvas).getbbox()
-                )
-            if same:
-                return  # evita reescribir el PNG (y ensuciar git) si la imagen no cambia
-        canvas.save(dest, "PNG")
+        buffer = io.BytesIO()
+        canvas.save(buffer, "WEBP", quality=85, method=6)
+    # El codificador es determinista: si los bytes coinciden no se reescribe (y git no ve cambios)
+    if not dest.exists() or dest.read_bytes() != buffer.getvalue():
+        dest.write_bytes(buffer.getvalue())
 
 
 def build_publication(entry):
@@ -195,7 +195,11 @@ def build_publication(entry):
 
     image = find_source(entry_id, extensions=IMAGE_EXTENSIONS)
     if image:
-        make_featured_image(image, bundle / "featured.png")
+        make_featured_image(image, bundle / FEATURED_NAME)
+        # Portadas de versiones anteriores del script: Blowfish usaría la primera que encuentre
+        for old in bundle.glob("featured.*"):
+            if old.name != FEATURED_NAME:
+                old.unlink()
 
     if entry.get("url"):
         front_matter.append(f"website: {yaml_str(entry['url'])}")

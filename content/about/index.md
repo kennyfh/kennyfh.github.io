@@ -26,7 +26,7 @@ I hold a **2nd DAN Black Belt** and was recognized as a **High-Performance Athle
 
 Kung Fu taught me resilience, focus, and how to stay calm under pressure, skills that are surprisingly useful when you’re trying to debug a critical server failure!
 
-![alt text](kungfu.png)
+![alt text](kungfu.webp)
 
 
 ## 🤝 Community & Leadership
@@ -39,6 +39,6 @@ I also act as a Problem Setter and Head Judge for the **Ada Byron Programming Co
 
 ![alt text](complicaus.webp)
 
-![alt text](club-algoritmia-entrevista.png)
+![alt text](club-algoritmia-entrevista.webp)
 
 I’m always up for a good chat about data, AI, or martial arts. Feel free to reach out!
