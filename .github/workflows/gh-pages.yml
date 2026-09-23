@@ -24,7 +24,16 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: true
-          fetch-depth: 0
+          # Sin enableGitInfo no hace falta el historial: clon superficial (también del tema)
+          fetch-depth: 1
+
+      - name: Cache Hugo resources
+        uses: actions/cache@v4
+        with:
+          # Imágenes ya procesadas: evita redimensionarlas en cada despliegue
+          path: resources/_gen
+          key: hugo-resources-${{ hashFiles('assets/**', 'content/**/*.png', 'content/**/*.jpg', 'content/**/*.jpeg', 'content/**/*.webp', 'config/**', '.gitmodules') }}
+          restore-keys: hugo-resources-
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
@@ -34,7 +43,7 @@ jobs:
           extended: true
 
       - name: Build
-        run: hugo --minify
+        run: hugo --minify --gc
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
