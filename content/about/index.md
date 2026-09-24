@@ -6,39 +6,32 @@ showDate : false
 showTableOfContents : false
 ---
 
-Hi! I'm Kenny. I'm a **Data Engineer at Next Digital** and an **Applied AI Researcher** pursuing my PhD at the University of Seville. 
+Hi, I'm Kenny. I work as a Data Engineer at Next Digital and I'm pursuing a PhD in Engineering Management at the University of Seville.
 
-If I had to summarize what I do, I’d say I love solving complex puzzles. Whether it's building the cloud infrastructure to move massive amounts of data or training an AI to optimize a factory, I enjoy making systems smarter and more efficient.
+## Work
 
-## 💻 Building & Researching
+At Next Digital I build data pipelines on AWS: Airflow and dbt to orchestrate and transform, Redshift and S3 to store.
 
-My work is a mix of engineering and science. 
+My PhD is the applied side. I train models on real industrial data, like predicting how long each step takes when building a wind tower, or how lifts use energy based on their sensors.
 
-At **Next Digital**, I focus on the heavy lifting: designing automated cloud pipelines and making sure data flows smoothly and reliably. 
+## Kung Fu
 
-On the academic side, my **PhD research** pushes the boundaries of what we can actually *do* with that data. I build Deep Learning models to optimize industrial manufacturing and energy consumption. 
-
-## 🥋 Discipline & Focus
-
-I don't just spend my time staring at code. For over a decade, **Kung Fu** has been a huge part of who I am. 
-
-I hold a **2nd DAN Black Belt** and was recognized as a **High-Performance Athlete** after years of national competitions. Recently, I traded competing for giving back as a certified Judge and Referee. 
-
-Kung Fu taught me resilience, focus, and how to stay calm under pressure, skills that are surprisingly useful when you’re trying to debug a critical server failure!
+I've trained Kung Fu for over ten years. I'm a 2nd DAN black belt and competed nationally long enough to be named a High-Performance Athlete. I don't compete anymore; now I judge and referee. It's where I learned to stay focused under pressure.
 
 ![Competing in a Kung Fu sword form, wearing a black uniform and purple sash](kungfu.webp)
 
+## Algorithmics Club
 
-## 🤝 Community & Leadership
+In 2023 I co-founded the [Algorithmics Club of the University of Seville](https://clubalgoritmiaus.es/en). We run weekly sessions on algorithms and competitive programming, and I teach every week.
 
-I strongly believe that the best way to learn is to share. 
-
-In 2023, I co-founded the **[Algorithmics Club of the University of Seville](https://clubalgoritmiaus.es/en)**. What started as a small idea is now a thriving community where I teach advanced algorithms and competitive programming every week. 
-
-I also act as a Problem Setter and Head Judge for the **Ada Byron Programming Contest**, creating algorithmic challenges for students from six different universities. Seeing the next generation of engineers crack a tough problem is incredibly rewarding to me.
+![A weekly club session: a speaker at the whiteboard and students at their computers](club-sesion.webp)
 
 ![Group photo of Algorithmics Club members and contestants in a university lecture hall](complicaus.webp)
 
+I also organise the Andalusian round of the Ada Byron Programming Contest: I write the problems and judge the submissions from six universities.
+
+![Teams competing in the Ada Byron Programming Contest, with balloons for solved problems](ada-byron-concurso.webp)
+
 ![Interview on the Ada Byron Programming Contest livestream](club-algoritmia-entrevista.webp)
 
-I’m always up for a good chat about data, AI, or martial arts. Feel free to reach out!
+If any of this sounds interesting, or you just want to talk about Kung Fu, send me an email at [kflores1@us.es](mailto:kflores1@us.es).
