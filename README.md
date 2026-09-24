@@ -46,7 +46,7 @@ hugo server
 | `layouts/publications/single.html` | Plantilla propia para la página de cada publicación |
 | `assets/css/custom.css` | Estilos propios (Blowfish lo carga automáticamente) |
 | `assets/icons/` | Iconos extra de [Font Awesome Free](https://fontawesome.com/license/free) que no trae el tema |
-| `publications.bib` + `source_files/` | Fuente de las publicaciones (ver abajo) |
+| `publications.bib` + `source_files/` | Fuente de las publicaciones; `source_files/` es una bandeja de entrada y normalmente está vacía (ver abajo) |
 
 ## Añadir publicaciones
 
@@ -61,7 +61,7 @@ hugo server
    uv run generate_publications.py
    ```
 
-El script crea o actualiza `content/publications/<id>/index.md` y solo reescribe los PDFs y las portadas si han cambiado. El texto de `content/publications/_index.md` (la página de la lista) se edita a mano y el script no lo toca.
+El script crea o actualiza `content/publications/<id>/index.md` y **mueve** los ficheros de `source_files/` al bundle de cada publicación, así que la carpeta queda vacía. Los PDFs y portadas que ya están en `content/` se conservan; para sustituir uno, deja la nueva versión en `source_files/` y vuelve a ejecutar el script. El texto de `content/publications/_index.md` (la página de la lista) se edita a mano y el script no lo toca.
 
 ## Imágenes y PDFs
 

@@ -2,7 +2,7 @@
 
 Para cada entrada del .bib se crea `content/publications/<id>/index.md`. Si en
 `source_files/` hay ficheros cuyo nombre coincide con el ID de la entrada, se
-copian al bundle:
+mueven al bundle (la carpeta es una bandeja de entrada y queda vacía):
 
 - `<id>.pdf`             -> botón "PDF"
 - `<id>_slides.pdf`      -> botón "Slides"
@@ -12,7 +12,6 @@ El `_index.md` de la sección solo se crea si no existe, para no perder el
 contenido que se haya añadido a mano.
 """
 
-import filecmp
 import io
 import json
 import re
@@ -134,11 +133,6 @@ def get_date(entry):
     return f"{year:04d}-{month:02d}-01" if year else None
 
 
-def copy_if_changed(src, dest):
-    if not dest.exists() or not filecmp.cmp(src, dest, shallow=False):
-        shutil.copy(src, dest)
-
-
 def find_source(entry_id, suffix="", extensions=(".pdf",)):
     """Busca en source_files/ un fichero `<entry_id><suffix>.<ext>` sin distinguir mayúsculas."""
     wanted = f"{entry_id}{suffix}".lower()
@@ -203,19 +197,19 @@ def build_publication(entry):
     if doi:
         front_matter.append(f"doi: {yaml_str(doi)}")
 
-    pdf = find_source(entry_id)
-    if pdf:
-        copy_if_changed(pdf, bundle / f"{slug}.pdf")
-        front_matter.append(f'pdf: "{slug}.pdf"')
-
-    slides = find_source(entry_id, suffix="_slides")
-    if slides:
-        copy_if_changed(slides, bundle / f"{slug}_slides.pdf")
-        front_matter.append(f'slides: "{slug}_slides.pdf"')
+    # Un fichero nuevo en source_files/ sustituye al del bundle; si no hay, se conserva el que ya estaba
+    for suffix, key in (("", "pdf"), ("_slides", "slides")):
+        dest = bundle / f"{slug}{suffix}.pdf"
+        src = find_source(entry_id, suffix=suffix)
+        if src:
+            shutil.move(src, dest)
+        if dest.exists():
+            front_matter.append(f'{key}: "{dest.name}"')
 
     image = find_source(entry_id, extensions=IMAGE_EXTENSIONS)
     if image:
         make_featured_image(image, bundle / FEATURED_NAME)
+        image.unlink()
         # Portadas de versiones anteriores del script: Blowfish usaría la primera que encuentre
         for old in bundle.glob("featured.*"):
             if old.name != FEATURED_NAME:
@@ -241,6 +235,7 @@ def main():
         entries = bibtexparser.load(f, parser=parser).entries
 
     CONTENT_DIR.mkdir(parents=True, exist_ok=True)
+    SOURCE_FILES_DIR.mkdir(exist_ok=True)
     section_index = CONTENT_DIR / "_index.md"
     if not section_index.exists():
         section_index.write_text(SECTION_INDEX, encoding="utf-8")
